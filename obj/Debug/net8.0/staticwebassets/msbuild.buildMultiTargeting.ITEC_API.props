@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\ITEC_API.props" />
+</Project>
