@@ -7,5 +7,6 @@ namespace ITEC_API.IServices
     {
         Task addInstructor(InstructorRequest instructorRequest);
         Task<List<AllInstructorResponse>> getAllInstructors();
+        Task addCourseName(CourseNameRequest courseNameRequest);
     }
 }

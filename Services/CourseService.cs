@@ -229,12 +229,45 @@ namespace ITEC_API.Services
                     {
                         InstructorId = instructor.InstructorId,
                         InstructorName = instructor.InstructorName,
-                        Avatar = instructor.Avatar
+                        Avatar = instructor.Avatar,
+                        instructorCourseNameResponses = new List<InstructorCourseNameResponse>()
                     };
+
+                    if (instructor.InstructorKnowCourses != null) {
+
+                        foreach (var singleCourseName in instructor.InstructorKnowCourses)
+                        {
+                            singleInstructor.instructorCourseNameResponses.Add(new InstructorCourseNameResponse
+                            {
+                                CourseName = singleCourseName.CourseName.Name
+                            });
+                        }
+                    }
+
                     instructorList.Add(singleInstructor);
                 }
             }
             return instructorList;
+        }
+
+        public async Task<List<CourseNameRequest>> getAllCourseNames()
+        {
+            var courseNameList = new List<CourseNameRequest>();
+
+            var allCourseNames = await _icourserepo.getAllCourseNames();
+
+            if(allCourseNames != null)
+            {
+                foreach(var courseName in allCourseNames)
+                {
+                    var singleCourseName = new CourseNameRequest()
+                    {
+                        Name = courseName.Name,
+                    };
+                    courseNameList.Add(singleCourseName);
+                }
+            }
+            return courseNameList;
         }
     }
 }

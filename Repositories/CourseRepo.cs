@@ -80,8 +80,15 @@ namespace ITEC_API.Repositories
 
         public async Task<List<Instructor>> getInstructorForCourse()
         {
-            var allInstructors = await _itecdbcontext.Instructors.ToListAsync();
+            var allInstructors = await _itecdbcontext.Instructors
+                .Include(i => i.InstructorKnowCourses).ThenInclude(ik => ik.CourseName).ToListAsync();
             return allInstructors;
+        }
+
+        public async Task<List<CourseName>> getAllCourseNames()
+        {
+            var allCourseNames = await _itecdbcontext.CourseNames.ToListAsync();
+            return allCourseNames;
         }
     }
 }

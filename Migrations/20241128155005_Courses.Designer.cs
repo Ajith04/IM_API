@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ITEC_API.Migrations
 {
     [DbContext(typeof(ITECDbContext))]
-    [Migration("20241125122800_Course")]
-    partial class Course
+    [Migration("20241128155005_Courses")]
+    partial class Courses
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -116,6 +116,23 @@ namespace ITEC_API.Migrations
                     b.ToTable("CourseLevels");
                 });
 
+            modelBuilder.Entity("ITEC_API.Models.CourseModels.CourseName", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CourseNames");
+                });
+
             modelBuilder.Entity("ITEC_API.Models.CourseModels.Instructor", b =>
                 {
                     b.Property<int>("InstructorId")
@@ -174,6 +191,29 @@ namespace ITEC_API.Migrations
                     b.HasIndex("InstructorId");
 
                     b.ToTable("InstructorEnrollments");
+                });
+
+            modelBuilder.Entity("ITEC_API.Models.CourseModels.InstructorKnowCourses", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CourseNameId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("InstructorId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CourseNameId");
+
+                    b.HasIndex("InstructorId");
+
+                    b.ToTable("InstructorKnowCourses");
                 });
 
             modelBuilder.Entity("ITEC_API.Models.CourseModels.Level", b =>
@@ -295,6 +335,25 @@ namespace ITEC_API.Migrations
                     b.Navigation("Instructor");
                 });
 
+            modelBuilder.Entity("ITEC_API.Models.CourseModels.InstructorKnowCourses", b =>
+                {
+                    b.HasOne("ITEC_API.Models.CourseModels.CourseName", "CourseName")
+                        .WithMany("InstructorKnowCourses")
+                        .HasForeignKey("CourseNameId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ITEC_API.Models.CourseModels.Instructor", "Instructor")
+                        .WithMany("InstructorKnowCourses")
+                        .HasForeignKey("InstructorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("CourseName");
+
+                    b.Navigation("Instructor");
+                });
+
             modelBuilder.Entity("ITEC_API.Models.CourseModels.LevelEnrollment", b =>
                 {
                     b.HasOne("ITEC_API.Models.CourseModels.CourseLevel", "CourseLevel")
@@ -327,9 +386,16 @@ namespace ITEC_API.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("ITEC_API.Models.CourseModels.CourseName", b =>
+                {
+                    b.Navigation("InstructorKnowCourses");
+                });
+
             modelBuilder.Entity("ITEC_API.Models.CourseModels.Instructor", b =>
                 {
                     b.Navigation("InstructorEnrollments");
+
+                    b.Navigation("InstructorKnowCourses");
                 });
 
             modelBuilder.Entity("ITEC_API.Models.CourseModels.Level", b =>

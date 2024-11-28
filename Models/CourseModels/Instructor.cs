@@ -13,5 +13,7 @@ namespace ITEC_API.Models.CourseModels
         public string Mobile { get; set; }
         public string Email { get; set; }
         public virtual ICollection<InstructorEnrollment> InstructorEnrollments { get; set; }
+
+        public virtual ICollection<InstructorKnowCourses> InstructorKnowCourses { get; set; }
     }
 }

@@ -6,5 +6,7 @@ namespace ITEC_API.IRepositories
     {
         Task addInstructor(Instructor instructor);
         Task<List<Instructor>> getAllInstructors();
+        Task addCourseName(CourseName courseName);
+        Task<CourseName> getRecordByCourseName(string courseName);
     }
 }

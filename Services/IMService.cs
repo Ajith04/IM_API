@@ -21,12 +21,29 @@ namespace ITEC_API.Services
             {
                 InstructorName = instructorRequest.InstructorName,
                 Description = instructorRequest.Description,
+                InstructorKnowCourses = new List<InstructorKnowCourses>(),
                 DateOfJoin = instructorRequest.DateOfJoin,
                 Mobile = instructorRequest.Mobile,
                 Email = instructorRequest.Email
 
              
             };
+
+            if(instructorRequest.CourseNames != null) 
+            {
+                foreach (var singleCourseName in instructorRequest.CourseNames)
+                {
+                    var singleRecord = await _iimrepo.getRecordByCourseName(singleCourseName);
+
+                    if (singleRecord != null)
+                    {
+                        instructor.InstructorKnowCourses.Add(new InstructorKnowCourses
+                        {
+                            CourseNameId = singleRecord.Id
+                        });
+                    }
+                }
+            }
 
             if (instructorRequest.Avatar != null)
             {
@@ -63,6 +80,16 @@ namespace ITEC_API.Services
                 }
             }
             return instructorList;
+        }
+
+        public async Task addCourseName(CourseNameRequest courseNameRequest)
+        {
+            var courseName = new CourseName()
+            {
+                Name = courseNameRequest.Name,
+            };
+
+            await _iimrepo.addCourseName(courseName);
         }
     }
 }

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ITEC_API.Migrations
 {
     /// <inheritdoc />
-    public partial class Course : Migration
+    public partial class Courses : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -22,6 +22,19 @@ namespace ITEC_API.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Categories", x => x.CategoryId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CourseNames",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CourseNames", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -66,6 +79,32 @@ namespace ITEC_API.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_MainCourses", x => x.MainCourseId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "InstructorKnowCourses",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    InstructorId = table.Column<int>(type: "int", nullable: false),
+                    CourseNameId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_InstructorKnowCourses", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_InstructorKnowCourses_CourseNames_CourseNameId",
+                        column: x => x.CourseNameId,
+                        principalTable: "CourseNames",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_InstructorKnowCourses_Instructors_InstructorId",
+                        column: x => x.InstructorId,
+                        principalTable: "Instructors",
+                        principalColumn: "InstructorId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -219,6 +258,16 @@ namespace ITEC_API.Migrations
                 column: "InstructorId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_InstructorKnowCourses_CourseNameId",
+                table: "InstructorKnowCourses",
+                column: "CourseNameId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_InstructorKnowCourses_InstructorId",
+                table: "InstructorKnowCourses",
+                column: "InstructorId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_LevelEnrollments_CourseId",
                 table: "LevelEnrollments",
                 column: "CourseId",
@@ -243,10 +292,16 @@ namespace ITEC_API.Migrations
                 name: "InstructorEnrollments");
 
             migrationBuilder.DropTable(
+                name: "InstructorKnowCourses");
+
+            migrationBuilder.DropTable(
                 name: "LevelEnrollments");
 
             migrationBuilder.DropTable(
                 name: "Categories");
+
+            migrationBuilder.DropTable(
+                name: "CourseNames");
 
             migrationBuilder.DropTable(
                 name: "Instructors");

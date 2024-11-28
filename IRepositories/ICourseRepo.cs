@@ -18,5 +18,6 @@ namespace ITEC_API.IRepositories
 
         Task<List<MainCourse>> getAllCourses();
         Task<List<Instructor>> getInstructorForCourse();
+        Task<List<CourseName>> getAllCourseNames();
     }
 }

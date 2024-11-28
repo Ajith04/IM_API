@@ -29,5 +29,12 @@ namespace ITEC_API.Controllers
             var allInstructors = await _iimservice.getAllInstructors();
             return Ok(allInstructors);
         }
+
+        [HttpPost ("add-course-name")]
+        public async Task<IActionResult> addCourseName(CourseNameRequest courseNameRequest)
+        {
+            await _iimservice.addCourseName(courseNameRequest);
+            return Ok();
+        }
     }
 }

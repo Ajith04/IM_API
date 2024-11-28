@@ -283,3 +283,4 @@ E:\Institute_Management\Back-End\ITEC_API\obj\Debug\net8.0\refint\ITEC_API.dll
 E:\Institute_Management\Back-End\ITEC_API\obj\Debug\net8.0\ITEC_API.pdb
 E:\Institute_Management\Back-End\ITEC_API\obj\Debug\net8.0\ITEC_API.genruntimeconfig.cache
 E:\Institute_Management\Back-End\ITEC_API\obj\Debug\net8.0\ref\ITEC_API.dll
+E:\Institute_Management\Back-End\ITEC_API\obj\Debug\net8.0\ITEC_API.sourcelink.json

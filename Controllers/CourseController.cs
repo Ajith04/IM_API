@@ -64,5 +64,12 @@ namespace ITEC_API.Controllers
             var allInstructors = await _icourseservice.getInstructorForCourse();
             return Ok(allInstructors);
         }
+
+        [HttpGet ("get-all-course-names")]
+        public async Task<IActionResult> getAllCourseNames()
+        {
+            var allCourseNames = await _icourseservice.getAllCourseNames();
+            return Ok(allCourseNames);
+        }
     }
 }

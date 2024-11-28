@@ -27,5 +27,17 @@ namespace ITEC_API.Repositories
             return allInstructors;
         }
 
+        public async Task addCourseName(CourseName courseName)
+        {
+            await _itecdbcontext.CourseNames.AddAsync(courseName);
+            await _itecdbcontext.SaveChangesAsync();
+        }
+
+        public async Task<CourseName> getRecordByCourseName(string courseName)
+        {
+            var singleRecord = await _itecdbcontext.CourseNames.SingleOrDefaultAsync(r => r.Name == courseName);
+            return singleRecord;
+        }
+
     }
 }

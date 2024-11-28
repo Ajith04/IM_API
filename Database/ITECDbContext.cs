@@ -19,6 +19,8 @@ namespace ITEC_API.Database
         public DbSet<Level> Levels { get; set; }
         public DbSet<CategoryEnrollment> CategoryEnrollments { get; set; }
         public DbSet<LevelEnrollment> LevelEnrollments { get; set; }
+        public DbSet<CourseName> CourseNames { get; set; }
+        public DbSet<InstructorKnowCourses> InstructorKnowCourses { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -61,6 +63,16 @@ namespace ITEC_API.Database
                .HasMany(mc => mc.CourseImages)
                .WithOne(ci => ci.MainCourse)
                .HasForeignKey(ci => ci.MainCourseId);
+
+            modelBuilder.Entity<Instructor>()
+               .HasMany(i => i.InstructorKnowCourses)
+               .WithOne(ik => ik.Instructor)
+               .HasForeignKey(ik => ik.InstructorId);
+
+            modelBuilder.Entity<CourseName>()
+               .HasMany(cn => cn.InstructorKnowCourses)
+               .WithOne(ik => ik.CourseName)
+               .HasForeignKey(ik => ik.CourseNameId);
         }
     }
 }

@@ -15,5 +15,6 @@ namespace ITEC_API.IServices
 
         Task<List<AllMainCoursesResponse>> getAllCourses();
         Task<List<InstructorForCourseResponse>> getInstructorForCourse();
+        Task<List<CourseNameRequest>> getAllCourseNames();
     }
 }
