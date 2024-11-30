@@ -16,5 +16,9 @@ namespace ITEC_API.IServices
         Task<List<AllMainCoursesResponse>> getAllCourses();
         Task<List<InstructorForCourseResponse>> getInstructorForCourse();
         Task<List<CourseNameRequest>> getAllCourseNames();
+        Task<EditCourseLevelResponse> getSingleCourseLevel(string id);
+        Task updateSingleCourseLevel(string levelId, UpdateSingleCourseRequest updateSingleCourseRequest);
+        Task assignInstructor(AssignInstructorRequest assignInstructorRequest);
+        Task<List<AssignInstructorResponse>> getAssignedInstructor(string courseId);
     }
 }

@@ -269,5 +269,82 @@ namespace ITEC_API.Services
             }
             return courseNameList;
         }
+
+        public async Task<EditCourseLevelResponse> getSingleCourseLevel(string id)
+        {
+            var singleStudent = await _icourserepo.getSingleCourseLevel(id);
+
+
+            var singleLevelResponse = new EditCourseLevelResponse()
+            {
+                CourseName = singleStudent.MainCourse.CourseName,
+                Thumbnail = singleStudent.MainCourse?.CourseImages?.FirstOrDefault()?.Thumbnails,
+                LevelId = singleStudent.CourseId,
+                LevelName = singleStudent.LevelEnrollment.Level.LevelName,
+                CreatedDate = singleStudent.CreatedDate,
+                Duration = singleStudent.Duration,
+                CourseFee = singleStudent.CourseFee,
+                Description = singleStudent.Description
+
+            };
+
+            return singleLevelResponse;
+        }
+
+        public async Task updateSingleCourseLevel(string levelId, UpdateSingleCourseRequest updateSingleCourseRequest)
+        {
+            var singleLevel = await _icourserepo.findCourseLevelById(levelId);
+
+            singleLevel.Duration = updateSingleCourseRequest.Duration;
+            singleLevel.CourseFee = updateSingleCourseRequest.CourseFee;
+            singleLevel.Description = updateSingleCourseRequest.Description;
+
+            await _icourserepo.updateSingleCourseLevel(singleLevel);
+        }
+
+        public async Task assignInstructor(AssignInstructorRequest assignInstructorRequest)
+        {
+            var instructorEnrollment = new InstructorEnrollment()
+            {
+                CourseId = assignInstructorRequest.CourseId,
+                InstructorId = assignInstructorRequest.InstructorId,
+            };
+
+            await _icourserepo.assignInstructor(instructorEnrollment);
+        }
+
+        public async Task<List<AssignInstructorResponse>> getAssignedInstructor(string courseId)
+        {
+            var instructorList = new List<AssignInstructorResponse>();
+
+            var instructors = await _icourserepo.getAssignedInstructor(courseId);
+            if(instructors != null)
+            {
+                foreach(var instructor in instructors)
+                {
+                    var singleInstructor = new AssignInstructorResponse()
+                    {
+                        InstructorName = instructor.Instructor.InstructorName,
+                        Avatar = instructor.Instructor.Avatar,
+                        InstructorKnowCourses = new List<InstructorKnowCourseResponse>()
+
+                    };
+
+                    if(instructor.Instructor.InstructorKnowCourses != null)
+                    {
+                        foreach(var courseName in instructor.Instructor.InstructorKnowCourses)
+                        {
+                            singleInstructor.InstructorKnowCourses.Add(new InstructorKnowCourseResponse
+                            {
+                                CourseName = courseName.CourseName.Name
+                            });
+                            
+                        }
+                    }
+                    instructorList.Add(singleInstructor);
+                }
+            }
+            return instructorList;
+        }
     }
 }

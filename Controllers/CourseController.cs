@@ -1,4 +1,5 @@
 ﻿using ITEC_API.DTO.RequestDTO;
+using ITEC_API.DTO.ResponseDTO;
 using ITEC_API.IServices;
 using ITEC_API.Models.CourseModels;
 using Microsoft.AspNetCore.Http;
@@ -70,6 +71,34 @@ namespace ITEC_API.Controllers
         {
             var allCourseNames = await _icourseservice.getAllCourseNames();
             return Ok(allCourseNames);
+        }
+
+        [HttpGet ("get-single-course-level/{id}")]
+        public async Task<IActionResult> getSingleCourseLevel(string id)
+        {
+            var singleLevel = await _icourseservice.getSingleCourseLevel(id);
+            return Ok(singleLevel);
+        }
+
+        [HttpPatch ("update-single-course/{levelId}")]
+        public async Task<IActionResult> updateSingleCourse(string levelId, UpdateSingleCourseRequest updateSingleCourseRequest)
+        {
+            await _icourseservice.updateSingleCourseLevel(levelId, updateSingleCourseRequest);
+            return Ok();
+        }
+
+        [HttpPost ("assign-instructor")]
+        public async Task<IActionResult> assignInstructor(AssignInstructorRequest assignInstructorRequest)
+        {
+            await _icourseservice.assignInstructor(assignInstructorRequest);
+            return Ok();
+        }
+
+        [HttpGet ("get-assigned-instructors/{courseId}")]
+        public async Task<IActionResult> getAssignedInstructor(string courseId)
+        {
+            var instructors = await _icourseservice.getAssignedInstructor(courseId);
+            return Ok(instructors);
         }
     }
 }

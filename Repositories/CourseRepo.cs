@@ -90,5 +90,41 @@ namespace ITEC_API.Repositories
             var allCourseNames = await _itecdbcontext.CourseNames.ToListAsync();
             return allCourseNames;
         }
+
+        public async Task<CourseLevel> getSingleCourseLevel(string id)
+        {
+            var singleLevel = await _itecdbcontext.CourseLevels.Include(cl => cl.MainCourse).ThenInclude(mc => mc.CourseImages)
+                .Include(cl => cl.LevelEnrollment).ThenInclude(le => le.Level)
+                .SingleOrDefaultAsync(cl => cl.CourseId == id);
+            return singleLevel;
+        }
+
+        public async Task<CourseLevel> findCourseLevelById(string levelId)
+        {
+            var singleLevel = await _itecdbcontext.CourseLevels.SingleOrDefaultAsync(r => r.CourseId == levelId);
+            return singleLevel;
+        }
+
+        public async Task updateSingleCourseLevel(CourseLevel courseLevel)
+        {
+            _itecdbcontext.CourseLevels.Update(courseLevel);
+            _itecdbcontext.SaveChanges();
+        }
+
+        public async Task assignInstructor(InstructorEnrollment instructorEnrollment)
+        {
+            await _itecdbcontext.InstructorEnrollments.AddAsync(instructorEnrollment);
+            await _itecdbcontext.SaveChangesAsync();
+        }
+
+        public async Task<List<InstructorEnrollment>> getAssignedInstructor(string courseId)
+        {
+            var instructors = await _itecdbcontext.InstructorEnrollments
+                .Include(ie => ie.Instructor)
+                .ThenInclude(i => i.InstructorKnowCourses)
+                .ThenInclude(ik => ik.CourseName).Where(ie => ie.CourseId == courseId).ToListAsync();
+
+            return instructors;
+        }
     }
 }
