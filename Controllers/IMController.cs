@@ -36,5 +36,61 @@ namespace ITEC_API.Controllers
             await _iimservice.addCourseName(courseNameRequest);
             return Ok();
         }
+
+        [HttpPost ("add-category")]
+        public async Task<IActionResult> addNewCategory(CategoryNameRequest categoryNameRequest)
+        {
+            await _iimservice.addNewCategory(categoryNameRequest);
+            return Ok();
+        }
+
+        [HttpGet ("get-all-categories")]
+        public async Task<IActionResult> getAllCategories()
+        {
+            var allCategories = await _iimservice.getAllCategories();
+            return Ok(allCategories);
+        }
+
+        [HttpPost("add-level")]
+        public async Task<IActionResult> addNewLevel(LevelNameRequest levelNameRequest)
+        {
+            await _iimservice.addNewLevel(levelNameRequest);
+            return Ok();
+        }
+
+        [HttpGet("get-all-levels")]
+        public async Task<IActionResult> getAllLevels()
+        {
+            var allLevels = await _iimservice.getAllLevels();
+            return Ok(allLevels);
+        }
+
+        [HttpPost("add-batch")]
+        public async Task<IActionResult> addNewBatch(BatchNameRequest batchNameRequest)
+        {
+            await _iimservice.addNewBatch(batchNameRequest);
+            return Ok();
+        }
+
+        [HttpGet("get-all-batches")]
+        public async Task<IActionResult> getAllBatches()
+        {
+            var allBatches = await _iimservice.getAllBatches();
+            return Ok(allBatches);
+        }
+
+        [HttpPost ("add-expense")]
+        public async Task<IActionResult> addExpense(ExpenseRequest expenseRequest)
+        {
+            await _iimservice.addExpense(expenseRequest);
+            return Ok();
+        }
+
+        [HttpGet ("get-all-expenses")]
+        public async Task<IActionResult> getAllExpenses()
+        {
+            var allExpenses = await _iimservice.getAllExpenses();
+            return Ok(allExpenses);
+        }
     }
 }

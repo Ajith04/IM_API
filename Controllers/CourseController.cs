@@ -59,10 +59,10 @@ namespace ITEC_API.Controllers
             return Ok(allCourses);
         }
 
-        [HttpGet ("get-instructor-for-course")]
-        public async Task<IActionResult> getInstructorForCourse()
+        [HttpGet ("get-instructor-for-course/{levelId}")]
+        public async Task<IActionResult> getInstructorForCourse(string levelId)
         {
-            var allInstructors = await _icourseservice.getInstructorForCourse();
+            var allInstructors = await _icourseservice.getInstructorForCourse(levelId);
             return Ok(allInstructors);
         }
 
@@ -99,6 +99,20 @@ namespace ITEC_API.Controllers
         {
             var instructors = await _icourseservice.getAssignedInstructor(courseId);
             return Ok(instructors);
+        }
+
+        [HttpDelete ("remove-assigned-instructor/{enrollmentId}")]
+        public async Task<IActionResult> deleteInstructorEnrollment(int enrollmentId)
+        {
+            await _icourseservice.deleteInstructorEnrollment(enrollmentId);
+            return Ok();
+        }
+
+        [HttpDelete ("delete-course-level/{levelId}")]
+        public async Task<IActionResult> deleteCourseLevel(string levelId)
+        {
+            await _icourseservice.deleteCourseLevel(levelId);
+            return Ok();
         }
     }
 }

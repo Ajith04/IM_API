@@ -1,4 +1,5 @@
 ﻿using ITEC_API.Models.CourseModels;
+using ITEC_API.Models.PaymentModels;
 
 namespace ITEC_API.IRepositories
 {
@@ -8,5 +9,13 @@ namespace ITEC_API.IRepositories
         Task<List<Instructor>> getAllInstructors();
         Task addCourseName(CourseName courseName);
         Task<CourseName> getRecordByCourseName(string courseName);
+        Task addNewCategory(Category category);
+        Task<List<Category>> getAllCategories();
+        Task addNewLevel(Level level);
+        Task<List<Level>> getAllLevels();
+        Task addNewBatch(Batch batch);
+        Task<List<Batch>> getAllBatches();
+        Task addExpense(Expense expense);
+        Task<List<Expense>> getAllExpenses();
     }
 }

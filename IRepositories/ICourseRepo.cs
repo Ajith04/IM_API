@@ -17,13 +17,16 @@ namespace ITEC_API.IRepositories
         Task addLevelEnrollment(LevelEnrollment levelEnrollment);
 
         Task<List<MainCourse>> getAllCourses();
-        Task<List<Instructor>> getInstructorForCourse();
+        Task<List<Instructor>> getInstructorForCourse(string levelId);
         Task<List<CourseName>> getAllCourseNames();
         Task<CourseLevel> getSingleCourseLevel(string id);
         Task<CourseLevel> findCourseLevelById(string levelId);
         Task updateSingleCourseLevel(CourseLevel courseLevel);
         Task assignInstructor(InstructorEnrollment instructorEnrollment);
         Task<List<InstructorEnrollment>> getAssignedInstructor(string courseId);
+        Task deleteInstructorEnrollment(int enrollmentId);
+        Task deleteCourseLevel(string levelId);
+        Task<List<InstructorEnrollment>> getEnrollmentsByLevelId(string levelId);
 
     }
 }

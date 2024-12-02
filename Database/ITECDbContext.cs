@@ -1,5 +1,6 @@
 ﻿using ITEC_API.Models;
 using ITEC_API.Models.CourseModels;
+using ITEC_API.Models.PaymentModels;
 using Microsoft.EntityFrameworkCore;
 
 namespace ITEC_API.Database
@@ -21,6 +22,9 @@ namespace ITEC_API.Database
         public DbSet<LevelEnrollment> LevelEnrollments { get; set; }
         public DbSet<CourseName> CourseNames { get; set; }
         public DbSet<InstructorKnowCourses> InstructorKnowCourses { get; set; }
+        public DbSet<Batch> Batches { get; set; }
+        public DbSet<Expense> Expenses { get; set; }
+        public DbSet<ExpenseReceipt> expenseReceipts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -73,6 +77,11 @@ namespace ITEC_API.Database
                .HasMany(cn => cn.InstructorKnowCourses)
                .WithOne(ik => ik.CourseName)
                .HasForeignKey(ik => ik.CourseNameId);
+
+            modelBuilder.Entity<Expense>()
+                 .HasMany(e => e.ExpenseReceipts)
+                 .WithOne(er => er.Expense)
+                 .HasForeignKey(er => er.ExpenseId);
         }
     }
 }

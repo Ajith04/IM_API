@@ -2,6 +2,7 @@
 using ITEC_API.IRepositories;
 using ITEC_API.Models.CourseModels;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 
 namespace ITEC_API.Repositories
 {
@@ -78,12 +79,24 @@ namespace ITEC_API.Repositories
             return allCourses;
         }
 
-        public async Task<List<Instructor>> getInstructorForCourse()
+        public async Task<List<InstructorEnrollment>> getEnrollmentsByLevelId(string levelId)
         {
-            var allInstructors = await _itecdbcontext.Instructors
-                .Include(i => i.InstructorKnowCourses).ThenInclude(ik => ik.CourseName).ToListAsync();
-            return allInstructors;
+            var instructorEnrollments = await _itecdbcontext.InstructorEnrollments.Where(r => r.CourseId == levelId).ToListAsync();
+            return instructorEnrollments;
         }
+
+        public async Task<List<Instructor>> getInstructorForCourse(string levelId)
+        {
+            var instructors = await _itecdbcontext.Instructors
+                .Where(i => !i.InstructorEnrollments.Any(ie => ie.CourseId == levelId))
+                .Include(i => i.InstructorKnowCourses)
+                .ThenInclude(ik => ik.CourseName)
+                .ToListAsync();
+
+            return instructors;
+        }
+
+
 
         public async Task<List<CourseName>> getAllCourseNames()
         {
@@ -125,6 +138,28 @@ namespace ITEC_API.Repositories
                 .ThenInclude(ik => ik.CourseName).Where(ie => ie.CourseId == courseId).ToListAsync();
 
             return instructors;
+        }
+
+        public async Task deleteInstructorEnrollment(int enrollmentId)
+        {
+            var singleEnrollment = await _itecdbcontext.InstructorEnrollments.SingleOrDefaultAsync(r => r.EnrollmentId == enrollmentId);
+            if (singleEnrollment != null)
+            {
+                _itecdbcontext.InstructorEnrollments.Remove(singleEnrollment);
+                await _itecdbcontext.SaveChangesAsync();
+            }
+            
+        }
+
+        public async Task deleteCourseLevel(string levelId)
+        {
+            var singleLevel = await _itecdbcontext.CourseLevels.SingleOrDefaultAsync(r => r.CourseId == levelId);
+            if (singleLevel != null)
+            {
+                _itecdbcontext.CourseLevels.Remove(singleLevel);
+                await _itecdbcontext.SaveChangesAsync();
+            }
+
         }
     }
 }

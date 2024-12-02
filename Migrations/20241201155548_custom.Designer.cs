@@ -4,6 +4,7 @@ using ITEC_API.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ITEC_API.Migrations
 {
     [DbContext(typeof(ITECDbContext))]
-    partial class ITECDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241201155548_custom")]
+    partial class custom
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -289,55 +292,6 @@ namespace ITEC_API.Migrations
                     b.ToTable("MainCourses");
                 });
 
-            modelBuilder.Entity("ITEC_API.Models.PaymentModels.Expense", b =>
-                {
-                    b.Property<int>("ExpenseId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ExpenseId"));
-
-                    b.Property<decimal>("Amount")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ExpenseId");
-
-                    b.ToTable("Expenses");
-                });
-
-            modelBuilder.Entity("ITEC_API.Models.PaymentModels.ExpenseReceipt", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("ExpenseId")
-                        .HasColumnType("int");
-
-                    b.Property<byte[]>("Receipt")
-                        .IsRequired()
-                        .HasColumnType("varbinary(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ExpenseId");
-
-                    b.ToTable("expenseReceipts");
-                });
-
             modelBuilder.Entity("ITEC_API.Models.CourseModels.CategoryEnrollment", b =>
                 {
                     b.HasOne("ITEC_API.Models.CourseModels.Category", "Category")
@@ -436,17 +390,6 @@ namespace ITEC_API.Migrations
                     b.Navigation("Level");
                 });
 
-            modelBuilder.Entity("ITEC_API.Models.PaymentModels.ExpenseReceipt", b =>
-                {
-                    b.HasOne("ITEC_API.Models.PaymentModels.Expense", "Expense")
-                        .WithMany("ExpenseReceipts")
-                        .HasForeignKey("ExpenseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Expense");
-                });
-
             modelBuilder.Entity("ITEC_API.Models.CourseModels.Category", b =>
                 {
                     b.Navigation("CategoryEnrollments");
@@ -484,11 +427,6 @@ namespace ITEC_API.Migrations
                     b.Navigation("CourseImages");
 
                     b.Navigation("CourseLevels");
-                });
-
-            modelBuilder.Entity("ITEC_API.Models.PaymentModels.Expense", b =>
-                {
-                    b.Navigation("ExpenseReceipts");
                 });
 #pragma warning restore 612, 618
         }

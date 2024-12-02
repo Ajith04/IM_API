@@ -14,11 +14,13 @@ namespace ITEC_API.IServices
         Task addCourseLevel(AddCourseLevelRequest addCourseLevelRequest);
 
         Task<List<AllMainCoursesResponse>> getAllCourses();
-        Task<List<InstructorForCourseResponse>> getInstructorForCourse();
+        Task<List<InstructorForCourseResponse>> getInstructorForCourse(string levelId);
         Task<List<CourseNameRequest>> getAllCourseNames();
         Task<EditCourseLevelResponse> getSingleCourseLevel(string id);
         Task updateSingleCourseLevel(string levelId, UpdateSingleCourseRequest updateSingleCourseRequest);
         Task assignInstructor(AssignInstructorRequest assignInstructorRequest);
         Task<List<AssignInstructorResponse>> getAssignedInstructor(string courseId);
+        Task deleteInstructorEnrollment(int enrollmentId);
+        Task deleteCourseLevel(string levelId);
     }
 }

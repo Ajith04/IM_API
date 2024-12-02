@@ -216,35 +216,40 @@ namespace ITEC_API.Services
             return courseList;
         }
 
-        public async Task<List<InstructorForCourseResponse>> getInstructorForCourse()
+        public async Task<List<InstructorForCourseResponse>> getInstructorForCourse(string levelId)
         {
+
+
             var instructorList = new List<InstructorForCourseResponse>();
 
-            var allInstructors = await _icourserepo.getInstructorForCourse();
+            var allInstructors = await _icourserepo.getInstructorForCourse(levelId);
+
             if(allInstructors != null)
             {
                 foreach (var instructor in allInstructors)
                 {
-                    var singleInstructor = new InstructorForCourseResponse()
-                    {
-                        InstructorId = instructor.InstructorId,
-                        InstructorName = instructor.InstructorName,
-                        Avatar = instructor.Avatar,
-                        instructorCourseNameResponses = new List<InstructorCourseNameResponse>()
-                    };
-
-                    if (instructor.InstructorKnowCourses != null) {
-
-                        foreach (var singleCourseName in instructor.InstructorKnowCourses)
-                        {
-                            singleInstructor.instructorCourseNameResponses.Add(new InstructorCourseNameResponse
+                   
+                       
+                            var singleInstructor = new InstructorForCourseResponse()
                             {
-                                CourseName = singleCourseName.CourseName.Name
-                            });
-                        }
-                    }
+                                InstructorId = instructor.InstructorId,
+                                InstructorName = instructor.InstructorName,
+                                Avatar = instructor.Avatar,
+                                instructorCourseNameResponses = new List<InstructorCourseNameResponse>()
+                            };
 
-                    instructorList.Add(singleInstructor);
+                            if (instructor.InstructorKnowCourses != null)
+                            {
+
+                                foreach (var singleCourseName in instructor.InstructorKnowCourses)
+                                {
+                                    singleInstructor.instructorCourseNameResponses.Add(new InstructorCourseNameResponse
+                                    {
+                                        CourseName = singleCourseName.CourseName.Name
+                                    });
+                                }
+                            }
+                        instructorList.Add(singleInstructor);
                 }
             }
             return instructorList;
@@ -324,6 +329,7 @@ namespace ITEC_API.Services
                 {
                     var singleInstructor = new AssignInstructorResponse()
                     {
+                        EnrollmentId = instructor.EnrollmentId,
                         InstructorName = instructor.Instructor.InstructorName,
                         Avatar = instructor.Instructor.Avatar,
                         InstructorKnowCourses = new List<InstructorKnowCourseResponse>()
@@ -345,6 +351,16 @@ namespace ITEC_API.Services
                 }
             }
             return instructorList;
+        }
+
+        public async Task deleteInstructorEnrollment(int enrollmentId)
+        {
+            await _icourserepo.deleteInstructorEnrollment(enrollmentId);
+        }
+
+        public async Task deleteCourseLevel(string levelId)
+        {
+            await _icourserepo.deleteCourseLevel(levelId);
         }
     }
 }
