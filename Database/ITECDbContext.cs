@@ -26,6 +26,8 @@ namespace ITEC_API.Database
         public DbSet<Expense> Expenses { get; set; }
         public DbSet<ExpenseReceipt> expenseReceipts { get; set; }
 
+        public DbSet<RegistrationFee> registrationFee { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<MainCourse>()

@@ -17,5 +17,8 @@ namespace ITEC_API.IServices
 
         Task addExpense(ExpenseRequest expenseRequest);
         Task<List<ExpenseResponse>> getAllExpenses();
+        Task<decimal> getRegFee();
+        Task changeRegFee(ChangeRegFee changeRegFee);
+        Task removeInstructor(int instructorId);
     }
 }

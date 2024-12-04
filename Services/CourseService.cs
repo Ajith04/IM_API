@@ -277,19 +277,19 @@ namespace ITEC_API.Services
 
         public async Task<EditCourseLevelResponse> getSingleCourseLevel(string id)
         {
-            var singleStudent = await _icourserepo.getSingleCourseLevel(id);
+            var singleLevel = await _icourserepo.getSingleCourseLevel(id);
 
 
             var singleLevelResponse = new EditCourseLevelResponse()
             {
-                CourseName = singleStudent.MainCourse.CourseName,
-                Thumbnail = singleStudent.MainCourse?.CourseImages?.FirstOrDefault()?.Thumbnails,
-                LevelId = singleStudent.CourseId,
-                LevelName = singleStudent.LevelEnrollment.Level.LevelName,
-                CreatedDate = singleStudent.CreatedDate,
-                Duration = singleStudent.Duration,
-                CourseFee = singleStudent.CourseFee,
-                Description = singleStudent.Description
+                CourseName = singleLevel.MainCourse.CourseName,
+                Thumbnail = singleLevel.MainCourse?.CourseImages?.FirstOrDefault()?.Thumbnails,
+                LevelId = singleLevel.CourseId,
+                LevelName = singleLevel.LevelEnrollment.Level.LevelName,
+                CreatedDate = singleLevel.CreatedDate,
+                Duration = singleLevel.Duration,
+                CourseFee = singleLevel.CourseFee,
+                Description = singleLevel.Description
 
             };
 

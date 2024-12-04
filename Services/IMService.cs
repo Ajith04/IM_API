@@ -70,13 +70,33 @@ namespace ITEC_API.Services
                 {
                     var singleInstructor = new AllInstructorResponse()
                     {
+                        InstructorId = instructor.InstructorId,
                         InstructorName = instructor.InstructorName,
                         Description = instructor.Description,
                         Avatar = instructor.Avatar,
                         DateOfJoin = instructor.DateOfJoin,
                         Mobile = instructor.Mobile,
-                        Email = instructor.Email
+                        Email = instructor.Email,
+                        instructorKnowCourseResponses = new List<InstructorKnowCourseResponse>(),
+                        instructorAssignedCourseResponses = new List<InstructorAssignedCourseResponse>(),
+                        
                     };
+
+                    foreach(var instructorKnowCourse in instructor.InstructorKnowCourses)
+                    {
+                        singleInstructor.instructorKnowCourseResponses.Add(new InstructorKnowCourseResponse
+                        {
+                            CourseName = instructorKnowCourse.CourseName.Name
+                        });
+                    }
+
+                    foreach( var instructorAssignedCourse in instructor.InstructorEnrollments)
+                    {
+                        singleInstructor.instructorAssignedCourseResponses.Add(new InstructorAssignedCourseResponse
+                        {
+                            CourseName = $"{instructorAssignedCourse.CourseLevel.MainCourse.CourseName}" + " - " + $"{instructorAssignedCourse.CourseLevel.LevelEnrollment.Level.LevelName}"
+                        });
+                    }
                     instructorList.Add(singleInstructor);
                 }
             }
@@ -233,6 +253,26 @@ namespace ITEC_API.Services
                 expenseList.Add(singleExpense);
             }
             return expenseList;
+        }
+
+        public async Task<decimal> getRegFee()
+        {
+            var regFeeRecord = await _iimrepo.getRegFee();
+            var regFee = regFeeRecord.RegFee;
+            return regFee;
+        }
+
+        public async Task changeRegFee(ChangeRegFee changeRegFee)
+        {
+            var regFeeRecord = await _iimrepo.getRegFee();
+            regFeeRecord.RegFee = changeRegFee.NewRegFee;
+
+            await _iimrepo.changeRegFee(regFeeRecord);
+        }
+
+        public async Task removeInstructor(int instructorId)
+        {
+            await _iimrepo.removeInstructor(instructorId);
         }
     }
 }

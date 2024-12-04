@@ -17,5 +17,8 @@ namespace ITEC_API.IRepositories
         Task<List<Batch>> getAllBatches();
         Task addExpense(Expense expense);
         Task<List<Expense>> getAllExpenses();
+        Task<RegistrationFee> getRegFee();
+        Task changeRegFee(RegistrationFee registrationFee);
+        Task removeInstructor(int instructorId);
     }
 }

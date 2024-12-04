@@ -24,7 +24,11 @@ namespace ITEC_API.Repositories
 
         public async Task<List<Instructor>> getAllInstructors()
         {
-            var allInstructors = await _itecdbcontext.Instructors.ToListAsync();
+            var allInstructors = await _itecdbcontext.Instructors
+                .Include(i => i.InstructorKnowCourses).ThenInclude(ik => ik.CourseName)
+                .Include(i => i.InstructorEnrollments).ThenInclude(ie => ie.CourseLevel).ThenInclude(cl => cl.MainCourse)
+                .Include(i => i.InstructorEnrollments).ThenInclude(ie => ie.CourseLevel).ThenInclude(cl => cl.LevelEnrollment).ThenInclude(le => le.Level)
+                .ToListAsync();
             return allInstructors;
         }
 
@@ -87,6 +91,29 @@ namespace ITEC_API.Repositories
             var allExpenses = await _itecdbcontext.Expenses
                 .Include(e => e.ExpenseReceipts).ToListAsync();
             return allExpenses;
+        }
+
+        public async Task<RegistrationFee> getRegFee()
+        {
+            var regFeeRecord = await _itecdbcontext.registrationFee.SingleOrDefaultAsync(r => r.Id == 1);
+            return regFeeRecord;
+           
+        }
+
+        public async Task changeRegFee(RegistrationFee registrationFee)
+        {
+            _itecdbcontext.registrationFee.Update(registrationFee);
+            await _itecdbcontext.SaveChangesAsync();
+        }
+
+        public async Task removeInstructor(int instructorId)
+        {
+            var singleInstructor = await _itecdbcontext.Instructors.SingleOrDefaultAsync(r => r.InstructorId == instructorId);
+            if (singleInstructor != null)
+            {
+                _itecdbcontext.Instructors.Remove(singleInstructor);
+                await _itecdbcontext.SaveChangesAsync();
+            }
         }
 
     }

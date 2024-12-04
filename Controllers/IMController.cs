@@ -92,5 +92,26 @@ namespace ITEC_API.Controllers
             var allExpenses = await _iimservice.getAllExpenses();
             return Ok(allExpenses);
         }
+
+        [HttpGet ("get-reg-fee")]
+        public async Task<IActionResult> getRegFee()
+        {
+            var regFee = await _iimservice.getRegFee();
+            return Ok(regFee);
+        }
+
+        [HttpPatch ("change-reg-fee")]
+        public async Task<IActionResult> changeRegFee(ChangeRegFee changeRegFee)
+        {
+            await _iimservice.changeRegFee(changeRegFee);
+            return Ok();
+        }
+
+        [HttpDelete ("remove-instructor-by-id/{instructorId}")]
+        public async Task<IActionResult> removeInstructor(int instructorId)
+        {
+            await _iimservice.removeInstructor(instructorId);
+            return Ok();
+        }
     }
 }
