@@ -113,5 +113,19 @@ namespace ITEC_API.Controllers
             await _iimservice.removeInstructor(instructorId);
             return Ok();
         }
+
+        [HttpGet ("get-single-instructor/{instructorId}")]
+        public async Task<IActionResult> getSingleInstructor(int instructorId)
+        {
+            var singleInstructor = await _iimservice.getSingleInstructor(instructorId);
+            return Ok(singleInstructor);
+        }
+
+        [HttpPatch ("update-instructor/{instructorId}")]
+        public async Task<IActionResult> updateInstructor(int instructorId, UpdateInstructorRequest updateInstructorRequest)
+        {
+            await _iimservice.updateInstructor(instructorId, updateInstructorRequest);
+            return Ok();
+        }
     }
 }

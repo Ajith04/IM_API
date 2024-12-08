@@ -2,6 +2,6 @@
 {
     public class InstructorCourseNameResponse
     {
-        public string CourseName { get; set; }
+        public string name { get; set; }
     }
 }

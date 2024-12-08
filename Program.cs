@@ -40,6 +40,9 @@ builder.Services.AddScoped<ICourseRepo, CourseRepo>();
 builder.Services.AddScoped<IIMService, IMService>();
 builder.Services.AddScoped<IIMRepo, IMRepo>();
 
+builder.Services.AddScoped<ISMService, SMService>();
+builder.Services.AddScoped<ISMRepo, SMRepo>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

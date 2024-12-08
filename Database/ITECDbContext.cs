@@ -1,6 +1,7 @@
 ﻿using ITEC_API.Models;
 using ITEC_API.Models.CourseModels;
 using ITEC_API.Models.PaymentModels;
+using ITEC_API.Models.StudyMaterialsModels;
 using Microsoft.EntityFrameworkCore;
 
 namespace ITEC_API.Database
@@ -27,6 +28,11 @@ namespace ITEC_API.Database
         public DbSet<ExpenseReceipt> expenseReceipts { get; set; }
 
         public DbSet<RegistrationFee> registrationFee { get; set; }
+
+        public DbSet<StudyMaterial> StudyMaterials { get; set; }
+        public DbSet<StudyMaterialFile> StudyMaterialFiles { get; set; }
+
+        
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -84,6 +90,21 @@ namespace ITEC_API.Database
                  .HasMany(e => e.ExpenseReceipts)
                  .WithOne(er => er.Expense)
                  .HasForeignKey(er => er.ExpenseId);
+
+            modelBuilder.Entity<StudyMaterial>()
+                .HasOne(sm => sm.CourseLevel)
+                .WithMany(cl => cl.StudyMaterials)
+                .HasForeignKey(sm => sm.LevelId);
+
+            modelBuilder.Entity<StudyMaterial>()
+                .HasOne(sm => sm.Batch)
+                .WithMany(b => b.StudyMaterials)
+                .HasForeignKey(sm => sm.BatchId);
+
+            modelBuilder.Entity<StudyMaterial>()
+                .HasMany(sm => sm.Files)
+                .WithOne(smf => smf.StudyMaterial)
+                .HasForeignKey(smf => smf.StudyMaterialId);
         }
     }
 }

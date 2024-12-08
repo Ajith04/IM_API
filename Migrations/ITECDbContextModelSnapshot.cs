@@ -354,6 +354,63 @@ namespace ITEC_API.Migrations
                     b.ToTable("registrationFee");
                 });
 
+            modelBuilder.Entity("ITEC_API.Models.StudyMaterialsModels.StudyMaterial", b =>
+                {
+                    b.Property<int>("StudyMaterialId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("StudyMaterialId"));
+
+                    b.Property<int>("BatchId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LevelId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("StudyMaterialId");
+
+                    b.HasIndex("BatchId");
+
+                    b.HasIndex("LevelId");
+
+                    b.ToTable("StudyMaterials");
+                });
+
+            modelBuilder.Entity("ITEC_API.Models.StudyMaterialsModels.StudyMaterialFile", b =>
+                {
+                    b.Property<int>("FileId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("FileId"));
+
+                    b.Property<byte[]>("File")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<int>("StudyMaterialId")
+                        .HasColumnType("int");
+
+                    b.HasKey("FileId");
+
+                    b.HasIndex("StudyMaterialId");
+
+                    b.ToTable("StudyMaterialFiles");
+                });
+
             modelBuilder.Entity("ITEC_API.Models.CourseModels.CategoryEnrollment", b =>
                 {
                     b.HasOne("ITEC_API.Models.CourseModels.Category", "Category")
@@ -463,6 +520,41 @@ namespace ITEC_API.Migrations
                     b.Navigation("Expense");
                 });
 
+            modelBuilder.Entity("ITEC_API.Models.StudyMaterialsModels.StudyMaterial", b =>
+                {
+                    b.HasOne("ITEC_API.Models.CourseModels.Batch", "Batch")
+                        .WithMany("StudyMaterials")
+                        .HasForeignKey("BatchId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ITEC_API.Models.CourseModels.CourseLevel", "CourseLevel")
+                        .WithMany("StudyMaterials")
+                        .HasForeignKey("LevelId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Batch");
+
+                    b.Navigation("CourseLevel");
+                });
+
+            modelBuilder.Entity("ITEC_API.Models.StudyMaterialsModels.StudyMaterialFile", b =>
+                {
+                    b.HasOne("ITEC_API.Models.StudyMaterialsModels.StudyMaterial", "StudyMaterial")
+                        .WithMany("Files")
+                        .HasForeignKey("StudyMaterialId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("StudyMaterial");
+                });
+
+            modelBuilder.Entity("ITEC_API.Models.CourseModels.Batch", b =>
+                {
+                    b.Navigation("StudyMaterials");
+                });
+
             modelBuilder.Entity("ITEC_API.Models.CourseModels.Category", b =>
                 {
                     b.Navigation("CategoryEnrollments");
@@ -474,6 +566,8 @@ namespace ITEC_API.Migrations
 
                     b.Navigation("LevelEnrollment")
                         .IsRequired();
+
+                    b.Navigation("StudyMaterials");
                 });
 
             modelBuilder.Entity("ITEC_API.Models.CourseModels.CourseName", b =>
@@ -505,6 +599,11 @@ namespace ITEC_API.Migrations
             modelBuilder.Entity("ITEC_API.Models.PaymentModels.Expense", b =>
                 {
                     b.Navigation("ExpenseReceipts");
+                });
+
+            modelBuilder.Entity("ITEC_API.Models.StudyMaterialsModels.StudyMaterial", b =>
+                {
+                    b.Navigation("Files");
                 });
 #pragma warning restore 612, 618
         }

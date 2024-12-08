@@ -116,5 +116,33 @@ namespace ITEC_API.Repositories
             }
         }
 
+        public async Task<Instructor> getSingleInstructor(int instructorId)
+        {
+            var singleInstructor = await _itecdbcontext.Instructors
+                .Include(i => i.InstructorKnowCourses).ThenInclude(ik => ik.CourseName)
+                .Include(i => i.InstructorEnrollments).ThenInclude(ie => ie.CourseLevel).ThenInclude(cl => cl.MainCourse)
+                .Include(i => i.InstructorEnrollments).ThenInclude(ie => ie.CourseLevel).ThenInclude(cl => cl.LevelEnrollment).ThenInclude(le => le.Level)
+                .SingleOrDefaultAsync(i => i.InstructorId == instructorId);
+            return singleInstructor;
+        }
+
+        public async Task<Instructor> findSingleInstructor(int instructorId)
+        {
+            var singleInstructor = await _itecdbcontext.Instructors.SingleOrDefaultAsync(r => r.InstructorId==instructorId);
+            return singleInstructor;
+        }
+
+        public async Task updateInstructor(Instructor instructor)
+        {
+            _itecdbcontext.Instructors.Update(instructor);
+            await _itecdbcontext.SaveChangesAsync();
+        }
+
+        public async Task deleteInstructorKnowCourses(int instructorId)
+        {
+           var selectedEnrollments =  await _itecdbcontext.InstructorKnowCourses.Where(r => r.InstructorId == instructorId).ToListAsync();
+            _itecdbcontext.InstructorKnowCourses.RemoveRange(selectedEnrollments);
+            await _itecdbcontext.SaveChangesAsync();
+        }
     }
 }

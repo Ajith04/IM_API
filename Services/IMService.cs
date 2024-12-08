@@ -86,7 +86,7 @@ namespace ITEC_API.Services
                     {
                         singleInstructor.instructorKnowCourseResponses.Add(new InstructorKnowCourseResponse
                         {
-                            CourseName = instructorKnowCourse.CourseName.Name
+                            name = instructorKnowCourse.CourseName.Name
                         });
                     }
 
@@ -273,6 +273,112 @@ namespace ITEC_API.Services
         public async Task removeInstructor(int instructorId)
         {
             await _iimrepo.removeInstructor(instructorId);
+        }
+
+        public async Task<AllInstructorResponse> getSingleInstructor(int instructorId)
+        {
+            var singleInstructor = await _iimrepo.getSingleInstructor(instructorId);
+
+            
+                var instructorResponse = new AllInstructorResponse()
+                {
+                    InstructorId = singleInstructor.InstructorId,
+                    InstructorName = singleInstructor.InstructorName,
+                    Description = singleInstructor.Description,
+                    Avatar = singleInstructor.Avatar,
+                    DateOfJoin = singleInstructor.DateOfJoin,
+                    Mobile = singleInstructor.Mobile,
+                    Email = singleInstructor.Email,
+                    instructorKnowCourseResponses = new List<InstructorKnowCourseResponse>(),
+                    instructorAssignedCourseResponses = new List<InstructorAssignedCourseResponse>()
+
+                };
+
+                if(singleInstructor.InstructorKnowCourses != null)
+                {
+                    foreach(var instructorKnowCourse in singleInstructor.InstructorKnowCourses)
+                    {
+                        instructorResponse.instructorKnowCourseResponses.Add(new InstructorKnowCourseResponse()
+                        {
+                            name = instructorKnowCourse.CourseName.Name
+                        });
+                    }
+                }
+
+                if (singleInstructor.InstructorEnrollments != null)
+                {
+                    foreach (var instructorAssignedCourse in singleInstructor.InstructorEnrollments)
+                    {
+                        instructorResponse.instructorAssignedCourseResponses.Add(new InstructorAssignedCourseResponse()
+                        {
+                            CourseName = $"{instructorAssignedCourse.CourseLevel.MainCourse.CourseName}" + " - " + $"{instructorAssignedCourse.CourseLevel.LevelEnrollment.Level.LevelName}"
+                        });
+                    }
+                }
+
+            return instructorResponse;
+
+        }
+
+        public async Task updateInstructor(int instructorId, UpdateInstructorRequest updateInstructorRequest)
+        {
+            var singleInstructor = await _iimrepo.findSingleInstructor(instructorId);
+
+            if (updateInstructorRequest.Avatar != null)
+            {
+                singleInstructor.Description = updateInstructorRequest.Description;
+                singleInstructor.Mobile = updateInstructorRequest.Mobile;
+                singleInstructor.Email = updateInstructorRequest.Email;
+                singleInstructor.InstructorKnowCourses = new List<InstructorKnowCourses>();
+
+
+                foreach (var singleCourseName in updateInstructorRequest.KnownCourses)
+                {
+                    var singleCourse = await _iimrepo.getRecordByCourseName(singleCourseName);
+                    if(singleCourse != null){
+                        singleInstructor.InstructorKnowCourses.Add(new InstructorKnowCourses()
+                        {
+                            CourseNameId = singleCourse.Id,
+                        });
+                    }
+                }
+
+                using (var memoryStream = new MemoryStream())
+                {
+                    await updateInstructorRequest.Avatar.CopyToAsync(memoryStream);
+                    singleInstructor.Avatar = memoryStream.ToArray();
+                }
+
+                await _iimrepo.deleteInstructorKnowCourses(instructorId);
+                await _iimrepo.updateInstructor(singleInstructor);
+            }
+            else
+            {
+                singleInstructor.Description = updateInstructorRequest.Description;
+                singleInstructor.Mobile = updateInstructorRequest.Mobile;
+                singleInstructor.Email = updateInstructorRequest.Email;
+                singleInstructor.InstructorKnowCourses = new List<InstructorKnowCourses>();
+
+
+                foreach (var singleCourseName in updateInstructorRequest.KnownCourses)
+                {
+                    var singleCourse = await _iimrepo.getRecordByCourseName(singleCourseName);
+                    if (singleCourse != null)
+                    {
+                        singleInstructor.InstructorKnowCourses.Add(new InstructorKnowCourses()
+                        {
+                            CourseNameId = singleCourse.Id,
+                        });
+                    }
+                }
+
+
+                await _iimrepo.deleteInstructorKnowCourses(instructorId);
+                await _iimrepo.updateInstructor(singleInstructor);
+            }
+
+            
+            
         }
     }
 }

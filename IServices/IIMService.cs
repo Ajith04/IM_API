@@ -20,5 +20,8 @@ namespace ITEC_API.IServices
         Task<decimal> getRegFee();
         Task changeRegFee(ChangeRegFee changeRegFee);
         Task removeInstructor(int instructorId);
+        Task<AllInstructorResponse> getSingleInstructor(int instructorId);
+
+        Task updateInstructor(int instructorId, UpdateInstructorRequest updateInstructorRequest);
     }
 }

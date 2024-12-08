@@ -20,5 +20,9 @@ namespace ITEC_API.IRepositories
         Task<RegistrationFee> getRegFee();
         Task changeRegFee(RegistrationFee registrationFee);
         Task removeInstructor(int instructorId);
+        Task<Instructor> getSingleInstructor(int instructorId);
+        Task<Instructor> findSingleInstructor(int instructorId);
+        Task updateInstructor(Instructor instructor);
+        Task deleteInstructorKnowCourses(int instructorId);
     }
 }

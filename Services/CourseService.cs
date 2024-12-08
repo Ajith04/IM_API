@@ -245,7 +245,7 @@ namespace ITEC_API.Services
                                 {
                                     singleInstructor.instructorCourseNameResponses.Add(new InstructorCourseNameResponse
                                     {
-                                        CourseName = singleCourseName.CourseName.Name
+                                        name = singleCourseName.CourseName.Name
                                     });
                                 }
                             }
@@ -342,7 +342,7 @@ namespace ITEC_API.Services
                         {
                             singleInstructor.InstructorKnowCourses.Add(new InstructorKnowCourseResponse
                             {
-                                CourseName = courseName.CourseName.Name
+                                name = courseName.CourseName.Name
                             });
                             
                         }
