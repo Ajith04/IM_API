@@ -43,6 +43,10 @@ builder.Services.AddScoped<IIMRepo, IMRepo>();
 builder.Services.AddScoped<ISMService, SMService>();
 builder.Services.AddScoped<ISMRepo, SMRepo>();
 
+builder.Services.AddScoped<IStudentService, StudentService>();
+builder.Services.AddScoped<IStudentRepo, StudentRepo>();
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

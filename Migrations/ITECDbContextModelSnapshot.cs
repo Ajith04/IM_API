@@ -354,6 +354,127 @@ namespace ITEC_API.Migrations
                     b.ToTable("registrationFee");
                 });
 
+            modelBuilder.Entity("ITEC_API.Models.StudentModels.FollowUp", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Mobile")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("FollowUps");
+                });
+
+            modelBuilder.Entity("ITEC_API.Models.StudentModels.FollowUpEnrollment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CourseNameID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("FollowUpId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CourseNameID");
+
+                    b.HasIndex("FollowUpId");
+
+                    b.ToTable("FollowUpEnrollments");
+                });
+
+            modelBuilder.Entity("ITEC_API.Models.StudentModels.Student", b =>
+                {
+                    b.Property<string>("StudentId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DateOfJoin")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Intake")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MobileNo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("StudentId");
+
+                    b.ToTable("Students");
+                });
+
+            modelBuilder.Entity("ITEC_API.Models.StudentModels.StudentBatchEnrollment", b =>
+                {
+                    b.Property<int>("BatchEnrollmentId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BatchEnrollmentId"));
+
+                    b.Property<int>("BatchId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("StudentId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("BatchEnrollmentId");
+
+                    b.HasIndex("BatchId");
+
+                    b.HasIndex("StudentId")
+                        .IsUnique();
+
+                    b.ToTable("StudentBatchEnrollments");
+                });
+
             modelBuilder.Entity("ITEC_API.Models.StudyMaterialsModels.StudyMaterial", b =>
                 {
                     b.Property<int>("StudyMaterialId")
@@ -520,6 +641,44 @@ namespace ITEC_API.Migrations
                     b.Navigation("Expense");
                 });
 
+            modelBuilder.Entity("ITEC_API.Models.StudentModels.FollowUpEnrollment", b =>
+                {
+                    b.HasOne("ITEC_API.Models.CourseModels.CourseName", "CourseName")
+                        .WithMany("FollowUpEnrollments")
+                        .HasForeignKey("CourseNameID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ITEC_API.Models.StudentModels.FollowUp", "FollowUp")
+                        .WithMany("FollowUpEnrollments")
+                        .HasForeignKey("FollowUpId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("CourseName");
+
+                    b.Navigation("FollowUp");
+                });
+
+            modelBuilder.Entity("ITEC_API.Models.StudentModels.StudentBatchEnrollment", b =>
+                {
+                    b.HasOne("ITEC_API.Models.CourseModels.Batch", "Batch")
+                        .WithMany("StudentBatchEnrollments")
+                        .HasForeignKey("BatchId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ITEC_API.Models.StudentModels.Student", "Student")
+                        .WithOne("StudentBatchEnrollment")
+                        .HasForeignKey("ITEC_API.Models.StudentModels.StudentBatchEnrollment", "StudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Batch");
+
+                    b.Navigation("Student");
+                });
+
             modelBuilder.Entity("ITEC_API.Models.StudyMaterialsModels.StudyMaterial", b =>
                 {
                     b.HasOne("ITEC_API.Models.CourseModels.Batch", "Batch")
@@ -552,6 +711,8 @@ namespace ITEC_API.Migrations
 
             modelBuilder.Entity("ITEC_API.Models.CourseModels.Batch", b =>
                 {
+                    b.Navigation("StudentBatchEnrollments");
+
                     b.Navigation("StudyMaterials");
                 });
 
@@ -572,6 +733,8 @@ namespace ITEC_API.Migrations
 
             modelBuilder.Entity("ITEC_API.Models.CourseModels.CourseName", b =>
                 {
+                    b.Navigation("FollowUpEnrollments");
+
                     b.Navigation("InstructorKnowCourses");
                 });
 
@@ -599,6 +762,17 @@ namespace ITEC_API.Migrations
             modelBuilder.Entity("ITEC_API.Models.PaymentModels.Expense", b =>
                 {
                     b.Navigation("ExpenseReceipts");
+                });
+
+            modelBuilder.Entity("ITEC_API.Models.StudentModels.FollowUp", b =>
+                {
+                    b.Navigation("FollowUpEnrollments");
+                });
+
+            modelBuilder.Entity("ITEC_API.Models.StudentModels.Student", b =>
+                {
+                    b.Navigation("StudentBatchEnrollment")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("ITEC_API.Models.StudyMaterialsModels.StudyMaterial", b =>

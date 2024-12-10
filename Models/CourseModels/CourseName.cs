@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using ITEC_API.Models.StudentModels;
+using System.ComponentModel.DataAnnotations;
 
 namespace ITEC_API.Models.CourseModels
 {
@@ -9,5 +10,6 @@ namespace ITEC_API.Models.CourseModels
         public string Name { get; set; }
 
         public virtual ICollection<InstructorKnowCourses> InstructorKnowCourses { get; set; }
+        public virtual ICollection<FollowUpEnrollment> FollowUpEnrollments { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using ITEC_API.Models.StudyMaterialsModels;
+﻿using ITEC_API.Models.StudentModels;
+using ITEC_API.Models.StudyMaterialsModels;
 using System.ComponentModel.DataAnnotations;
 
 namespace ITEC_API.Models.CourseModels
@@ -10,5 +11,7 @@ namespace ITEC_API.Models.CourseModels
         public string BatchName { get; set; }
 
         public virtual ICollection<StudyMaterial> StudyMaterials { get; set; }
+
+        public virtual ICollection<StudentBatchEnrollment> StudentBatchEnrollments { get; set; }
     }
 }

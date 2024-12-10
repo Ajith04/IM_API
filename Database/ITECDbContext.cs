@@ -1,6 +1,7 @@
 ﻿using ITEC_API.Models;
 using ITEC_API.Models.CourseModels;
 using ITEC_API.Models.PaymentModels;
+using ITEC_API.Models.StudentModels;
 using ITEC_API.Models.StudyMaterialsModels;
 using Microsoft.EntityFrameworkCore;
 
@@ -31,8 +32,15 @@ namespace ITEC_API.Database
 
         public DbSet<StudyMaterial> StudyMaterials { get; set; }
         public DbSet<StudyMaterialFile> StudyMaterialFiles { get; set; }
+        public DbSet<Student> Students { get; set; }
+        public DbSet<FollowUp> FollowUps { get; set; }
 
-        
+        public DbSet<FollowUpEnrollment> FollowUpEnrollments { get; set; }
+        public DbSet<StudentBatchEnrollment> StudentBatchEnrollments { get; set; }
+
+
+
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -105,6 +113,26 @@ namespace ITEC_API.Database
                 .HasMany(sm => sm.Files)
                 .WithOne(smf => smf.StudyMaterial)
                 .HasForeignKey(smf => smf.StudyMaterialId);
+
+            modelBuilder.Entity<FollowUp>()
+                .HasMany(fu => fu.FollowUpEnrollments)
+                .WithOne(fue => fue.FollowUp)
+                .HasForeignKey(fue => fue.FollowUpId);
+
+            modelBuilder.Entity<CourseName>()
+                .HasMany(cn => cn.FollowUpEnrollments)
+                .WithOne(fue => fue.CourseName)
+                .HasForeignKey(fue => fue.CourseNameID);
+
+            modelBuilder.Entity<Student>()
+               .HasOne(s => s.StudentBatchEnrollment)
+               .WithOne(sbe => sbe.Student)
+               .HasForeignKey<StudentBatchEnrollment>(sbe => sbe.StudentId);
+
+            modelBuilder.Entity<Batch>()
+               .HasMany(b => b.StudentBatchEnrollments)
+               .WithOne(sbe => sbe.Batch)
+               .HasForeignKey(sbe => sbe.BatchId);
         }
     }
 }
