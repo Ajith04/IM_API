@@ -37,6 +37,8 @@ namespace ITEC_API.Database
 
         public DbSet<FollowUpEnrollment> FollowUpEnrollments { get; set; }
         public DbSet<StudentBatchEnrollment> StudentBatchEnrollments { get; set; }
+        public DbSet<StudentRegFeeEnrollment> StudentRegFeeEnrollments { get; set; }
+        public DbSet<StudentCourseEnrollment> studentCourseEnrollments { get; set; }
 
 
 
@@ -133,6 +135,33 @@ namespace ITEC_API.Database
                .HasMany(b => b.StudentBatchEnrollments)
                .WithOne(sbe => sbe.Batch)
                .HasForeignKey(sbe => sbe.BatchId);
+
+            modelBuilder.Entity<Student>()
+               .HasOne(s => s.StudentRegFeeEnrollment)
+               .WithOne(rfe => rfe.Student)
+               .HasForeignKey<StudentRegFeeEnrollment>(rfe => rfe.StudentId);
+
+            modelBuilder.Entity<RegistrationFee>()
+               .HasMany(rf => rf.StudentRegFeeEnrollments)
+               .WithOne(rfe => rfe.RegistrationFee)
+               .HasForeignKey(rfe => rfe.RegFeeId);
+
+            modelBuilder.Entity<Student>()
+               .HasMany(s => s.StudentCourseEnrollments)
+               .WithOne(sce => sce.Student)
+               .HasForeignKey(sce => sce.StudentId);
+
+            modelBuilder.Entity<CourseLevel>()
+               .HasMany(cl => cl.StudentCourseEnrollments)
+               .WithOne(sce => sce.CourseLevel)
+               .HasForeignKey(sce => sce.CourseId);
+
+            modelBuilder.Entity<Instructor>()
+               .HasMany(i => i.StudentCourseEnrollments)
+               .WithOne(sce => sce.Instructor)
+               .HasForeignKey(sce => sce.InstructorId);
+
+
         }
     }
 }

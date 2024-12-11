@@ -141,6 +141,14 @@ E:\Remains\MS_03\Back-end\ITEC_API\obj\Debug\net8.0\ITEC_API.pdb
 E:\Remains\MS_03\Back-end\ITEC_API\obj\Debug\net8.0\ITEC_API.genruntimeconfig.cache
 E:\Remains\MS_03\Back-end\ITEC_API\obj\Debug\net8.0\ref\ITEC_API.dll
 E:\Remains\MS_03\Back-end\ITEC_API\obj\Debug\net8.0\ITEC_API.sourcelink.json
+E:\Institute_Management\Back-End\ITEC_API\obj\Debug\net8.0\ITEC_API.csproj.AssemblyReference.cache
+E:\Institute_Management\Back-End\ITEC_API\obj\Debug\net8.0\ITEC_API.GeneratedMSBuildEditorConfig.editorconfig
+E:\Institute_Management\Back-End\ITEC_API\obj\Debug\net8.0\ITEC_API.AssemblyInfoInputs.cache
+E:\Institute_Management\Back-End\ITEC_API\obj\Debug\net8.0\ITEC_API.AssemblyInfo.cs
+E:\Institute_Management\Back-End\ITEC_API\obj\Debug\net8.0\ITEC_API.csproj.CoreCompileInputs.cache
+E:\Institute_Management\Back-End\ITEC_API\obj\Debug\net8.0\ITEC_API.MvcApplicationPartsAssemblyInfo.cs
+E:\Institute_Management\Back-End\ITEC_API\obj\Debug\net8.0\ITEC_API.MvcApplicationPartsAssemblyInfo.cache
+E:\Institute_Management\Back-End\ITEC_API\obj\Debug\net8.0\ITEC_API.sourcelink.json
 E:\Institute_Management\Back-End\ITEC_API\bin\Debug\net8.0\appsettings.Development.json
 E:\Institute_Management\Back-End\ITEC_API\bin\Debug\net8.0\appsettings.json
 E:\Institute_Management\Back-End\ITEC_API\bin\Debug\net8.0\ITEC_API.exe
@@ -262,13 +270,6 @@ E:\Institute_Management\Back-End\ITEC_API\bin\Debug\net8.0\runtimes\win\lib\net6
 E:\Institute_Management\Back-End\ITEC_API\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Runtime.Caching.dll
 E:\Institute_Management\Back-End\ITEC_API\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
 E:\Institute_Management\Back-End\ITEC_API\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
-E:\Institute_Management\Back-End\ITEC_API\obj\Debug\net8.0\ITEC_API.csproj.AssemblyReference.cache
-E:\Institute_Management\Back-End\ITEC_API\obj\Debug\net8.0\ITEC_API.GeneratedMSBuildEditorConfig.editorconfig
-E:\Institute_Management\Back-End\ITEC_API\obj\Debug\net8.0\ITEC_API.AssemblyInfoInputs.cache
-E:\Institute_Management\Back-End\ITEC_API\obj\Debug\net8.0\ITEC_API.AssemblyInfo.cs
-E:\Institute_Management\Back-End\ITEC_API\obj\Debug\net8.0\ITEC_API.csproj.CoreCompileInputs.cache
-E:\Institute_Management\Back-End\ITEC_API\obj\Debug\net8.0\ITEC_API.MvcApplicationPartsAssemblyInfo.cs
-E:\Institute_Management\Back-End\ITEC_API\obj\Debug\net8.0\ITEC_API.MvcApplicationPartsAssemblyInfo.cache
 E:\Institute_Management\Back-End\ITEC_API\obj\Debug\net8.0\staticwebassets.build.json
 E:\Institute_Management\Back-End\ITEC_API\obj\Debug\net8.0\staticwebassets.development.json
 E:\Institute_Management\Back-End\ITEC_API\obj\Debug\net8.0\staticwebassets\msbuild.ITEC_API.Microsoft.AspNetCore.StaticWebAssets.props
@@ -283,4 +284,3 @@ E:\Institute_Management\Back-End\ITEC_API\obj\Debug\net8.0\refint\ITEC_API.dll
 E:\Institute_Management\Back-End\ITEC_API\obj\Debug\net8.0\ITEC_API.pdb
 E:\Institute_Management\Back-End\ITEC_API\obj\Debug\net8.0\ITEC_API.genruntimeconfig.cache
 E:\Institute_Management\Back-End\ITEC_API\obj\Debug\net8.0\ref\ITEC_API.dll
-E:\Institute_Management\Back-End\ITEC_API\obj\Debug\net8.0\ITEC_API.sourcelink.json

@@ -1,4 +1,5 @@
 ﻿using ITEC_API.DTO.RequestDTO;
+using ITEC_API.DTO.ResponseDTO;
 using ITEC_API.IServices;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -89,6 +90,27 @@ namespace ITEC_API.Controllers
         public async Task<IActionResult> addStudentBatchEnrollment(StudentBatchRequest studentBatchRequest)
         {
             await _iStudentService.addStudentBatchEnrollment (studentBatchRequest);
+            return Ok();
+        }
+
+        [HttpGet ("get-courses-for-student/{id}")]
+        public async Task<IActionResult> getCoursesForStudent(string id)
+        {
+            var allCourses = await _iStudentService.getCoursesForStudent(id);
+            return Ok(allCourses);
+        }
+
+        [HttpGet ("check-reg-fee/{id}")]
+        public async Task<IActionResult> checkRegFee(string id)
+        {
+            var status = await _iStudentService.checkRegFee(id);
+            return Ok(status);
+        }
+
+        [HttpPost ("add-student-course-enrollment")]
+        public async Task<IActionResult> addStudentCourseEnrollment(StudentEnrollmentRequest studentEnrollmentRequest)
+        {
+            await _iStudentService.addStudentCourseEnrollment (studentEnrollmentRequest);
             return Ok();
         }
 

@@ -475,6 +475,71 @@ namespace ITEC_API.Migrations
                     b.ToTable("StudentBatchEnrollments");
                 });
 
+            modelBuilder.Entity("ITEC_API.Models.StudentModels.StudentCourseEnrollment", b =>
+                {
+                    b.Property<int>("EnrollmentId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EnrollmentId"));
+
+                    b.Property<decimal>("CourseFee")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("CourseId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Duration")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("EnrollmentDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("InstructorId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("StudentId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("EnrollmentId");
+
+                    b.HasIndex("CourseId");
+
+                    b.HasIndex("InstructorId");
+
+                    b.HasIndex("StudentId");
+
+                    b.ToTable("studentCourseEnrollments");
+                });
+
+            modelBuilder.Entity("ITEC_API.Models.StudentModels.StudentRegFeeEnrollment", b =>
+                {
+                    b.Property<int>("RegFeeEnrollmentId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RegFeeEnrollmentId"));
+
+                    b.Property<int>("RegFeeId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("StudentId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("RegFeeEnrollmentId");
+
+                    b.HasIndex("RegFeeId");
+
+                    b.HasIndex("StudentId")
+                        .IsUnique();
+
+                    b.ToTable("StudentRegFeeEnrollments");
+                });
+
             modelBuilder.Entity("ITEC_API.Models.StudyMaterialsModels.StudyMaterial", b =>
                 {
                     b.Property<int>("StudyMaterialId")
@@ -679,6 +744,52 @@ namespace ITEC_API.Migrations
                     b.Navigation("Student");
                 });
 
+            modelBuilder.Entity("ITEC_API.Models.StudentModels.StudentCourseEnrollment", b =>
+                {
+                    b.HasOne("ITEC_API.Models.CourseModels.CourseLevel", "CourseLevel")
+                        .WithMany("StudentCourseEnrollments")
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ITEC_API.Models.CourseModels.Instructor", "Instructor")
+                        .WithMany("StudentCourseEnrollments")
+                        .HasForeignKey("InstructorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ITEC_API.Models.StudentModels.Student", "Student")
+                        .WithMany("StudentCourseEnrollments")
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("CourseLevel");
+
+                    b.Navigation("Instructor");
+
+                    b.Navigation("Student");
+                });
+
+            modelBuilder.Entity("ITEC_API.Models.StudentModels.StudentRegFeeEnrollment", b =>
+                {
+                    b.HasOne("ITEC_API.Models.PaymentModels.RegistrationFee", "RegistrationFee")
+                        .WithMany("StudentRegFeeEnrollments")
+                        .HasForeignKey("RegFeeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ITEC_API.Models.StudentModels.Student", "Student")
+                        .WithOne("StudentRegFeeEnrollment")
+                        .HasForeignKey("ITEC_API.Models.StudentModels.StudentRegFeeEnrollment", "StudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("RegistrationFee");
+
+                    b.Navigation("Student");
+                });
+
             modelBuilder.Entity("ITEC_API.Models.StudyMaterialsModels.StudyMaterial", b =>
                 {
                     b.HasOne("ITEC_API.Models.CourseModels.Batch", "Batch")
@@ -728,6 +839,8 @@ namespace ITEC_API.Migrations
                     b.Navigation("LevelEnrollment")
                         .IsRequired();
 
+                    b.Navigation("StudentCourseEnrollments");
+
                     b.Navigation("StudyMaterials");
                 });
 
@@ -743,6 +856,8 @@ namespace ITEC_API.Migrations
                     b.Navigation("InstructorEnrollments");
 
                     b.Navigation("InstructorKnowCourses");
+
+                    b.Navigation("StudentCourseEnrollments");
                 });
 
             modelBuilder.Entity("ITEC_API.Models.CourseModels.Level", b =>
@@ -764,6 +879,11 @@ namespace ITEC_API.Migrations
                     b.Navigation("ExpenseReceipts");
                 });
 
+            modelBuilder.Entity("ITEC_API.Models.PaymentModels.RegistrationFee", b =>
+                {
+                    b.Navigation("StudentRegFeeEnrollments");
+                });
+
             modelBuilder.Entity("ITEC_API.Models.StudentModels.FollowUp", b =>
                 {
                     b.Navigation("FollowUpEnrollments");
@@ -772,6 +892,11 @@ namespace ITEC_API.Migrations
             modelBuilder.Entity("ITEC_API.Models.StudentModels.Student", b =>
                 {
                     b.Navigation("StudentBatchEnrollment")
+                        .IsRequired();
+
+                    b.Navigation("StudentCourseEnrollments");
+
+                    b.Navigation("StudentRegFeeEnrollment")
                         .IsRequired();
                 });
 

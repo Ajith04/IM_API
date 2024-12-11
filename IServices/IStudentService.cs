@@ -16,5 +16,8 @@ namespace ITEC_API.IServices
         Task deleteStudent(string id);
         Task<List<BatchForStudentResponse>> getBatchesForStudent(string id);
         Task addStudentBatchEnrollment(StudentBatchRequest studentBatchRequest);
+        Task<List<CourseForStudentResponse>> getCoursesForStudent(string id);
+        Task<bool> checkRegFee(string id);
+        Task addStudentCourseEnrollment(StudentEnrollmentRequest studentEnrollmentRequest);
     }
 }

@@ -2,7 +2,10 @@
 using ITEC_API.DTO.ResponseDTO;
 using ITEC_API.IRepositories;
 using ITEC_API.IServices;
+using ITEC_API.Models.CourseModels;
 using ITEC_API.Models.StudentModels;
+using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
 
 namespace ITEC_API.Services
 {
@@ -129,7 +132,7 @@ namespace ITEC_API.Services
             {
                 foreach (var singleStudent in allStudents)
                 {
-                    studentList.Add(new StudentResponse()
+                    var studentResponse = new StudentResponse()
                     {
                         StudentId = singleStudent.StudentId,
                         FirstName = singleStudent.FirstName,
@@ -139,7 +142,29 @@ namespace ITEC_API.Services
                         Email = singleStudent.Email,
                         Address = singleStudent.Address,
                         Intake = singleStudent.Intake,
-                    });
+                        studentCourseLevelResponses = new List<StudentCourseLevelResponse>()
+                    };
+
+                    if (singleStudent.StudentCourseEnrollments != null)
+                    {
+                        foreach (var studentCourseEnrollment in singleStudent.StudentCourseEnrollments)
+                        {
+                            studentResponse.studentCourseLevelResponses.Add(new StudentCourseLevelResponse()
+                            {
+                                CourseId = studentCourseEnrollment.CourseId,
+                                CourseName = studentCourseEnrollment.CourseLevel.MainCourse.CourseName,
+                                LevelName = studentCourseEnrollment.CourseLevel.LevelEnrollment.Level.LevelName,
+                                Duration = studentCourseEnrollment.Duration,
+                                CourseFee = studentCourseEnrollment.CourseFee,
+                                Instructor = studentCourseEnrollment.Instructor.InstructorName,
+                                EnrolledDate = studentCourseEnrollment.EnrollmentDate
+                                
+                            });
+                        }
+                    }
+
+                    studentList.Add(studentResponse);
+                    
                 }
             }
             return studentList;
@@ -212,6 +237,88 @@ namespace ITEC_API.Services
             };
 
             await _iStudentRepo.addStudentBatchEnrollment(singleEnrollment);
+        }
+
+        public async Task<List<CourseForStudentResponse>> getCoursesForStudent(string id)
+        {
+            var courseList = new List<CourseForStudentResponse>();
+
+            var allCourses = await _iStudentRepo.getCoursesForStudent(id);
+
+            if(allCourses != null)
+            {
+                foreach(var course in allCourses)
+                {
+                    var courseResponse = new CourseForStudentResponse();
+                    courseResponse.MainCourseName = course.CourseName;
+                    courseResponse.CourseLevels = new List<CourseLevelForStudentResponse>();
+
+                    
+                    if(course.CourseLevels != null)
+                    {
+                        foreach(var courseLevel in course.CourseLevels)
+                        {
+                            var courseLevelResponse = new CourseLevelForStudentResponse();
+                            courseLevelResponse.LevelId = courseLevel.CourseId;
+                            courseLevelResponse.LevelName = courseLevel.LevelEnrollment.Level.LevelName;
+                            courseLevelResponse.CourseFee = courseLevel.CourseFee;
+                            courseLevelResponse.Duration = courseLevel.Duration;
+                            courseLevelResponse.CourseImages = new List<byte[]>();
+                            courseLevelResponse.Instructors = new List<InstructorForStudentCourseResponse>();
+
+                            if (course.CourseImages != null)
+                            {
+                                foreach (var image in course.CourseImages)
+                                {
+                                    courseLevelResponse.CourseImages.Add(image.Thumbnails);
+                                }
+                            }
+
+
+                            if (courseLevel.InstructorEnrollments != null)
+                            {
+                                foreach (var instructor in courseLevel.InstructorEnrollments)
+                                {
+                                    courseLevelResponse.Instructors.Add(new InstructorForStudentCourseResponse()
+                                    {
+                                        InstructorId = instructor.Instructor.InstructorId,
+                                        Name = instructor.Instructor.InstructorName,
+                                        Avatar = instructor.Instructor.Avatar,
+                                    });
+                                }
+                            }
+
+                            courseResponse.CourseLevels.Add(courseLevelResponse);
+                        }
+                    }
+
+                    courseList.Add(courseResponse);
+                }
+            }
+
+            return courseList;
+
+        }
+
+        public async Task<bool> checkRegFee(string id)
+        {
+            var status = await _iStudentRepo.checkRegFee(id);
+            return status;
+        }
+
+        public async Task addStudentCourseEnrollment(StudentEnrollmentRequest studentEnrollmentRequest)
+        {
+            var singleEnrollment = new StudentCourseEnrollment()
+            {
+                StudentId = studentEnrollmentRequest.StudentId,
+                CourseId = studentEnrollmentRequest.CourseId,
+                InstructorId = studentEnrollmentRequest.InstructorId,
+                CourseFee = studentEnrollmentRequest.CourseFee,
+                Duration = studentEnrollmentRequest.Duration,
+                EnrollmentDate = studentEnrollmentRequest.EnrollmentDate,
+            };
+
+            await _iStudentRepo.addStudentCourseEnrollment(singleEnrollment);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using ITEC_API.Database;
+using ITEC_API.DTO.RequestDTO;
 using ITEC_API.IRepositories;
 using ITEC_API.Models.CourseModels;
 using ITEC_API.Models.StudentModels;
@@ -60,7 +61,11 @@ namespace ITEC_API.Repositories
 
         public async Task<List<Student>> getAllStudents()
         {
-            var allStudents = await _itecdbcontext.Students.ToListAsync();
+            var allStudents = await _itecdbcontext.Students
+                .Include(s => s.StudentCourseEnrollments).ThenInclude(sce => sce.CourseLevel).ThenInclude(cl => cl.MainCourse)
+                .Include(s => s.StudentCourseEnrollments).ThenInclude(sce => sce.CourseLevel).ThenInclude(cl => cl.LevelEnrollment).ThenInclude(le => le.Level)
+                .Include(s => s.StudentCourseEnrollments).ThenInclude(sce => sce.Instructor)
+                .ToListAsync();
             return allStudents;
         }
 
@@ -96,6 +101,29 @@ namespace ITEC_API.Repositories
             await _itecdbcontext.StudentBatchEnrollments.AddAsync(studentBatchEnrollment);
             await _itecdbcontext.SaveChangesAsync();
         }
-        
+
+        public async Task<List<MainCourse>> getCoursesForStudent(string id)
+        {
+            var allCourses = await _itecdbcontext.MainCourses.Include(mc => mc.CourseLevels.Where(cl => !cl.StudentCourseEnrollments.Any(sce => sce.StudentId  == id)))
+                .ThenInclude(cl => cl.InstructorEnrollments).ThenInclude(ie => ie.Instructor)
+                .Include(mc => mc.CourseLevels).ThenInclude(cl => cl.LevelEnrollment).ThenInclude(le => le.Level)
+                .Include(mc => mc.CourseImages)
+                .ToListAsync();
+
+            return allCourses;
+        }
+
+        public async Task<bool> checkRegFee(string id)
+        {
+            var status = await _itecdbcontext.StudentRegFeeEnrollments.AnyAsync(r => r.StudentId == id);
+            return status;
+        }
+
+        public async Task addStudentCourseEnrollment(StudentCourseEnrollment studentCourseEnrollment)
+        {
+            await _itecdbcontext.studentCourseEnrollments.AddAsync(studentCourseEnrollment);
+            await _itecdbcontext.SaveChangesAsync();
+        }
+
     }
 }
