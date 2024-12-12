@@ -65,13 +65,19 @@ namespace ITEC_API.Repositories
                 .Include(s => s.StudentCourseEnrollments).ThenInclude(sce => sce.CourseLevel).ThenInclude(cl => cl.MainCourse)
                 .Include(s => s.StudentCourseEnrollments).ThenInclude(sce => sce.CourseLevel).ThenInclude(cl => cl.LevelEnrollment).ThenInclude(le => le.Level)
                 .Include(s => s.StudentCourseEnrollments).ThenInclude(sce => sce.Instructor)
+                .Include(s => s.StudentBatchEnrollment).ThenInclude(sbe => sbe.Batch)
                 .ToListAsync();
             return allStudents;
         }
 
         public async Task<Student> getSingleStudent(string id)
         {
-            var singleStudent = await _itecdbcontext.Students.SingleOrDefaultAsync(r => r.StudentId == id);
+            var singleStudent = await _itecdbcontext.Students
+                .Include(s => s.StudentCourseEnrollments).ThenInclude(sce => sce.CourseLevel).ThenInclude(cl => cl.MainCourse).ThenInclude(mc => mc.CourseImages)
+                .Include(s => s.StudentCourseEnrollments).ThenInclude(sce => sce.CourseLevel).ThenInclude(cl => cl.LevelEnrollment).ThenInclude(le => le.Level)
+                .Include(s => s.StudentCourseEnrollments).ThenInclude(sce => sce.Instructor)
+                .Include(s => s.StudentBatchEnrollment).ThenInclude(sbe => sbe.Batch)
+                .SingleOrDefaultAsync(r => r.StudentId == id);
             return singleStudent;
         }
 
@@ -122,6 +128,22 @@ namespace ITEC_API.Repositories
         public async Task addStudentCourseEnrollment(StudentCourseEnrollment studentCourseEnrollment)
         {
             await _itecdbcontext.studentCourseEnrollments.AddAsync(studentCourseEnrollment);
+            await _itecdbcontext.SaveChangesAsync();
+        }
+
+        public async Task deleteCourseEnrollment(int id)
+        {
+            var singleEnrollment = await _itecdbcontext.studentCourseEnrollments.SingleOrDefaultAsync(r => r.EnrollmentId == id);
+
+            _itecdbcontext.studentCourseEnrollments.Remove(singleEnrollment);
+            await _itecdbcontext.SaveChangesAsync();
+        }
+
+        public async Task deleteBatchEnrollment(int id)
+        {
+            var singleEnrollment = await _itecdbcontext.StudentBatchEnrollments.SingleOrDefaultAsync(r => r.BatchEnrollmentId == id);
+
+            _itecdbcontext.StudentBatchEnrollments.Remove(singleEnrollment);
             await _itecdbcontext.SaveChangesAsync();
         }
 

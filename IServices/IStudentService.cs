@@ -11,7 +11,7 @@ namespace ITEC_API.IServices
         Task removeFollowup(int id);
         Task updateDescription(int id, DescriptionRequest description);
         Task<List<StudentResponse>> getAllStudents();
-        Task<StudentResponse> getSingleStudent(string id);
+        Task<SingleStudentResponse> getSingleStudent(string id);
         Task updateSingleStudent(string id, StudentUpdateRequest studentUpdateRequest);
         Task deleteStudent(string id);
         Task<List<BatchForStudentResponse>> getBatchesForStudent(string id);
@@ -19,5 +19,7 @@ namespace ITEC_API.IServices
         Task<List<CourseForStudentResponse>> getCoursesForStudent(string id);
         Task<bool> checkRegFee(string id);
         Task addStudentCourseEnrollment(StudentEnrollmentRequest studentEnrollmentRequest);
+        Task deleteCourseEnrollment(int id);
+        Task deleteBatchEnrollment(int id);
     }
 }

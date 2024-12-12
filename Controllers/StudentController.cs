@@ -114,5 +114,19 @@ namespace ITEC_API.Controllers
             return Ok();
         }
 
+        [HttpDelete ("delete-course-enrollment/{id}")]
+        public async Task<IActionResult> deleteCourseEnrollment(int id)
+        {
+            await _iStudentService.deleteCourseEnrollment(id);
+            return Ok();
+        }
+
+        [HttpDelete("delete-batch-enrollment/{id}")]
+        public async Task<IActionResult> deleteBatchEnrollment(int id)
+        {
+            await _iStudentService.deleteBatchEnrollment(id);
+            return Ok();
+        }
+
     }
 }

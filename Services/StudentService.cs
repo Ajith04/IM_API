@@ -144,6 +144,11 @@ namespace ITEC_API.Services
                         Intake = singleStudent.Intake,
                         studentCourseLevelResponses = new List<StudentCourseLevelResponse>()
                     };
+                    
+                    if(singleStudent.StudentBatchEnrollment != null)
+                    {
+                        studentResponse.Batch = singleStudent.StudentBatchEnrollment.Batch.BatchName;
+                    }
 
                     if (singleStudent.StudentCourseEnrollments != null)
                     {
@@ -170,10 +175,10 @@ namespace ITEC_API.Services
             return studentList;
         }
 
-        public async Task<StudentResponse> getSingleStudent(string id)
+        public async Task<SingleStudentResponse> getSingleStudent(string id)
         {
             var singleStudent = await _iStudentRepo.getSingleStudent(id);
-            var studentResponse = new StudentResponse()
+            var studentResponse = new SingleStudentResponse()
             {
                 StudentId = singleStudent.StudentId,
                 FirstName = singleStudent.FirstName,
@@ -183,7 +188,31 @@ namespace ITEC_API.Services
                 Email = singleStudent.Email,
                 Address = singleStudent.Address,
                 Intake = singleStudent.Intake,
+                singleStudentCourseLevelResponses = new List<SingleStudentCourseLevelResponse>()
             };
+
+            if(singleStudent.StudentBatchEnrollment != null)
+            {
+                studentResponse.BatchEnrollmentId = singleStudent.StudentBatchEnrollment.BatchEnrollmentId;
+                studentResponse.Batch = singleStudent.StudentBatchEnrollment.Batch.BatchName;
+            }
+
+            if(singleStudent.StudentCourseEnrollments != null) 
+            { 
+                foreach(var courseEnrollment in singleStudent.StudentCourseEnrollments)
+                {
+                    studentResponse.singleStudentCourseLevelResponses.Add(new SingleStudentCourseLevelResponse()
+                    {
+                        CourseEnrollmentId = courseEnrollment.EnrollmentId,
+                        CourseImage = courseEnrollment.CourseLevel.MainCourse.CourseImages.FirstOrDefault()?.Thumbnails,
+                        CourseName = courseEnrollment.CourseLevel.MainCourse.CourseName,
+                        LevelName = courseEnrollment.CourseLevel.LevelEnrollment.Level.LevelName,
+                        InstructorName = courseEnrollment.Instructor.InstructorName
+
+                    });
+                }
+            }
+
             return studentResponse;
         }
 
@@ -319,6 +348,16 @@ namespace ITEC_API.Services
             };
 
             await _iStudentRepo.addStudentCourseEnrollment(singleEnrollment);
+        }
+
+        public async Task deleteCourseEnrollment(int id)
+        {
+            await _iStudentRepo.deleteCourseEnrollment(id);
+        }
+
+        public async Task deleteBatchEnrollment(int id)
+        {
+            await _iStudentRepo.deleteBatchEnrollment(id);
         }
     }
 }

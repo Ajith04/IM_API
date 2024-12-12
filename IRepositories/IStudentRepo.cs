@@ -22,5 +22,7 @@ namespace ITEC_API.IRepositories
         Task<List<MainCourse>> getCoursesForStudent(string id);
         Task<bool> checkRegFee(string id);
         Task addStudentCourseEnrollment(StudentCourseEnrollment studentCourseEnrollment);
+        Task deleteCourseEnrollment(int id);
+        Task deleteBatchEnrollment(int id);
     }
 }
