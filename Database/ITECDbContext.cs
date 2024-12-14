@@ -39,6 +39,7 @@ namespace ITEC_API.Database
         public DbSet<StudentBatchEnrollment> StudentBatchEnrollments { get; set; }
         public DbSet<StudentRegFeeEnrollment> StudentRegFeeEnrollments { get; set; }
         public DbSet<StudentCourseEnrollment> studentCourseEnrollments { get; set; }
+        public DbSet<Payment> payments { get; set; }
 
 
 
@@ -160,6 +161,11 @@ namespace ITEC_API.Database
                .HasMany(i => i.StudentCourseEnrollments)
                .WithOne(sce => sce.Instructor)
                .HasForeignKey(sce => sce.InstructorId);
+
+            modelBuilder.Entity<StudentCourseEnrollment>()
+               .HasMany(sce => sce.Payments)
+               .WithOne(p => p.studentCourseEnrollment)
+               .HasForeignKey(p => p.EnrollmentId);
 
 
         }

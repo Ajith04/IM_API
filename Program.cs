@@ -46,6 +46,9 @@ builder.Services.AddScoped<ISMRepo, SMRepo>();
 builder.Services.AddScoped<IStudentService, StudentService>();
 builder.Services.AddScoped<IStudentRepo, StudentRepo>();
 
+builder.Services.AddScoped<IPaymentService, PaymentService>();
+builder.Services.AddScoped<IPaymentRepo, PaymentRepo>();
+
 
 var app = builder.Build();
 

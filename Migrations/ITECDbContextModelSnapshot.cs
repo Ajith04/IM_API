@@ -338,6 +338,30 @@ namespace ITEC_API.Migrations
                     b.ToTable("expenseReceipts");
                 });
 
+            modelBuilder.Entity("ITEC_API.Models.PaymentModels.Payment", b =>
+                {
+                    b.Property<int>("PaymentId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PaymentId"));
+
+                    b.Property<int>("EnrollmentId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("PaidAmount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime>("PaidDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("PaymentId");
+
+                    b.HasIndex("EnrollmentId");
+
+                    b.ToTable("payments");
+                });
+
             modelBuilder.Entity("ITEC_API.Models.PaymentModels.RegistrationFee", b =>
                 {
                     b.Property<int>("Id")
@@ -706,6 +730,17 @@ namespace ITEC_API.Migrations
                     b.Navigation("Expense");
                 });
 
+            modelBuilder.Entity("ITEC_API.Models.PaymentModels.Payment", b =>
+                {
+                    b.HasOne("ITEC_API.Models.StudentModels.StudentCourseEnrollment", "studentCourseEnrollment")
+                        .WithMany("Payments")
+                        .HasForeignKey("EnrollmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("studentCourseEnrollment");
+                });
+
             modelBuilder.Entity("ITEC_API.Models.StudentModels.FollowUpEnrollment", b =>
                 {
                     b.HasOne("ITEC_API.Models.CourseModels.CourseName", "CourseName")
@@ -896,8 +931,12 @@ namespace ITEC_API.Migrations
 
                     b.Navigation("StudentCourseEnrollments");
 
-                    b.Navigation("StudentRegFeeEnrollment")
-                        .IsRequired();
+                    b.Navigation("StudentRegFeeEnrollment");
+                });
+
+            modelBuilder.Entity("ITEC_API.Models.StudentModels.StudentCourseEnrollment", b =>
+                {
+                    b.Navigation("Payments");
                 });
 
             modelBuilder.Entity("ITEC_API.Models.StudyMaterialsModels.StudyMaterial", b =>

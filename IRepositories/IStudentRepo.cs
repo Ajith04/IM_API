@@ -24,5 +24,6 @@ namespace ITEC_API.IRepositories
         Task addStudentCourseEnrollment(StudentCourseEnrollment studentCourseEnrollment);
         Task deleteCourseEnrollment(int id);
         Task deleteBatchEnrollment(int id);
+        Task<List<StudentCourseEnrollment>> getEnrollments();
     }
 }

@@ -15,7 +15,7 @@ namespace ITEC_API.Models.StudentModels
         public string Intake { get; set; }
 
         public StudentBatchEnrollment StudentBatchEnrollment { get; set; }
-        public StudentRegFeeEnrollment StudentRegFeeEnrollment { get; set; }
+        public StudentRegFeeEnrollment? StudentRegFeeEnrollment { get; set; }
         public virtual ICollection<StudentCourseEnrollment> StudentCourseEnrollments { get; set; }
     }
 }

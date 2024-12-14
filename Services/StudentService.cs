@@ -359,5 +359,26 @@ namespace ITEC_API.Services
         {
             await _iStudentRepo.deleteBatchEnrollment(id);
         }
+
+        public async Task<List<EnrollmentResponse>> getEnrollments()
+        {
+            var enrollmentList = new List<EnrollmentResponse>();
+
+            var allEnrollments = await _iStudentRepo.getEnrollments();
+            if(allEnrollments != null)
+            {
+                foreach(var enrollment in allEnrollments)
+                {
+                    enrollmentList.Add(new EnrollmentResponse()
+                    {
+                        StudentId = enrollment.StudentId,
+                        StudentName = enrollment.Student.FirstName,
+                        Course = $"{enrollment.CourseLevel.MainCourse.CourseName} - {enrollment.CourseLevel.LevelEnrollment.Level.LevelName}",
+                        EnrollDate = enrollment.EnrollmentDate
+                    });
+                }
+            }
+            return enrollmentList;
+        }
     }
 }

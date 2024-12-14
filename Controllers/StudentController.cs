@@ -128,5 +128,12 @@ namespace ITEC_API.Controllers
             return Ok();
         }
 
+        [HttpGet ("get-enrollments")]
+        public async Task<IActionResult> getEnrollments()
+        {
+            var enrollments = await _iStudentService.getEnrollments();
+            return Ok(enrollments);
+        }
+
     }
 }

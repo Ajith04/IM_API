@@ -147,5 +147,13 @@ namespace ITEC_API.Repositories
             await _itecdbcontext.SaveChangesAsync();
         }
 
+        public async Task<List<StudentCourseEnrollment>> getEnrollments()
+        {
+            var enrollments = await _itecdbcontext.studentCourseEnrollments.Include(sce => sce.Student)
+                .Include(sce => sce.CourseLevel).ThenInclude(cl => cl.LevelEnrollment).ThenInclude(le => le.Level)
+                .Include(sce => sce.CourseLevel).ThenInclude(cl => cl.MainCourse).ToListAsync();
+            return enrollments;
+        }
+
     }
 }

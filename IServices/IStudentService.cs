@@ -21,5 +21,6 @@ namespace ITEC_API.IServices
         Task addStudentCourseEnrollment(StudentEnrollmentRequest studentEnrollmentRequest);
         Task deleteCourseEnrollment(int id);
         Task deleteBatchEnrollment(int id);
+        Task<List<EnrollmentResponse>> getEnrollments();
     }
 }
