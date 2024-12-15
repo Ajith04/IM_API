@@ -22,6 +22,49 @@ namespace ITEC_API.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("ITEC_API.Models.AdminAuthModels.Account", b =>
+                {
+                    b.Property<int>("AccountId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AccountId"));
+
+                    b.Property<string>("MailId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
+
+                    b.HasKey("AccountId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("Accounts");
+                });
+
+            modelBuilder.Entity("ITEC_API.Models.AdminAuthModels.Role", b =>
+                {
+                    b.Property<int>("RoleId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RoleId"));
+
+                    b.Property<string>("RoleName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("RoleId");
+
+                    b.ToTable("Roles");
+                });
+
             modelBuilder.Entity("ITEC_API.Models.CourseModels.Batch", b =>
                 {
                     b.Property<int>("BatchId")
@@ -621,6 +664,17 @@ namespace ITEC_API.Migrations
                     b.ToTable("StudyMaterialFiles");
                 });
 
+            modelBuilder.Entity("ITEC_API.Models.AdminAuthModels.Account", b =>
+                {
+                    b.HasOne("ITEC_API.Models.AdminAuthModels.Role", "Role")
+                        .WithMany("Accounts")
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Role");
+                });
+
             modelBuilder.Entity("ITEC_API.Models.CourseModels.CategoryEnrollment", b =>
                 {
                     b.HasOne("ITEC_API.Models.CourseModels.Category", "Category")
@@ -853,6 +907,11 @@ namespace ITEC_API.Migrations
                         .IsRequired();
 
                     b.Navigation("StudyMaterial");
+                });
+
+            modelBuilder.Entity("ITEC_API.Models.AdminAuthModels.Role", b =>
+                {
+                    b.Navigation("Accounts");
                 });
 
             modelBuilder.Entity("ITEC_API.Models.CourseModels.Batch", b =>

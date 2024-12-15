@@ -1,4 +1,5 @@
 ﻿using ITEC_API.Models;
+using ITEC_API.Models.AdminAuthModels;
 using ITEC_API.Models.CourseModels;
 using ITEC_API.Models.PaymentModels;
 using ITEC_API.Models.StudentModels;
@@ -40,6 +41,8 @@ namespace ITEC_API.Database
         public DbSet<StudentRegFeeEnrollment> StudentRegFeeEnrollments { get; set; }
         public DbSet<StudentCourseEnrollment> studentCourseEnrollments { get; set; }
         public DbSet<Payment> payments { get; set; }
+        public DbSet<Role> Roles { get; set; }
+        public DbSet<Account> Accounts { get; set; }
 
 
 
@@ -166,6 +169,11 @@ namespace ITEC_API.Database
                .HasMany(sce => sce.Payments)
                .WithOne(p => p.studentCourseEnrollment)
                .HasForeignKey(p => p.EnrollmentId);
+
+            modelBuilder.Entity<Role>()
+               .HasMany(r => r.Accounts)
+               .WithOne(a => a.Role)
+               .HasForeignKey(a => a.RoleId);
 
 
         }

@@ -284,3 +284,11 @@ E:\Institute_Management\Back-End\ITEC_API\obj\Debug\net8.0\refint\ITEC_API.dll
 E:\Institute_Management\Back-End\ITEC_API\obj\Debug\net8.0\ITEC_API.pdb
 E:\Institute_Management\Back-End\ITEC_API\obj\Debug\net8.0\ITEC_API.genruntimeconfig.cache
 E:\Institute_Management\Back-End\ITEC_API\obj\Debug\net8.0\ref\ITEC_API.dll
+E:\Institute_Management\Back-End\ITEC_API\bin\Debug\net8.0\BouncyCastle.Cryptography.dll
+E:\Institute_Management\Back-End\ITEC_API\bin\Debug\net8.0\MailKit.dll
+E:\Institute_Management\Back-End\ITEC_API\bin\Debug\net8.0\MimeKit.dll
+E:\Institute_Management\Back-End\ITEC_API\bin\Debug\net8.0\System.Formats.Asn1.dll
+E:\Institute_Management\Back-End\ITEC_API\bin\Debug\net8.0\System.Security.Cryptography.Pkcs.dll
+E:\Institute_Management\Back-End\ITEC_API\bin\Debug\net8.0\runtimes\win\lib\net8.0\System.Security.Cryptography.Pkcs.dll
+E:\Institute_Management\Back-End\ITEC_API\bin\Debug\net8.0\BCrypt.Net.dll
+E:\Institute_Management\Back-End\ITEC_API\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
