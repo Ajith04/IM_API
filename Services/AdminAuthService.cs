@@ -4,6 +4,7 @@ using ITEC_API.IRepositories;
 using ITEC_API.IServices;
 using ITEC_API.Models.AdminAuthModels;
 using MailKit.Net.Smtp;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.IdentityModel.Tokens;
 using MimeKit;
 using System.IdentityModel.Tokens.Jwt;
@@ -96,7 +97,7 @@ namespace ITEC_API.Services
             var hashedOTP = BCrypt.Net.BCrypt.HashPassword(generatedOTP.ToString());
 
             var message = new MimeMessage();
-            message.From.Add(new MailboxAddress("Admin", _senderEmail));
+            message.From.Add(new MailboxAddress("ITEC Admin", _senderEmail));
             message.To.Add(new MailboxAddress("", passwordRequest.MailId));
             message.Subject = "Your OTP Code";
             message.Body = new TextPart("plain")
@@ -126,28 +127,27 @@ namespace ITEC_API.Services
             return int.Parse(otp.ToString());
         }
 
-        public async Task<string> login(loginRequest loginRequest)
+        public async Task<TokenResponse> login(loginRequest loginRequest)
         {
             var singleRecord = await _iAdminAuthRepo.getAccountByMailId(loginRequest.MailId);
 
-            if (singleRecord != null) 
-            {
                 if(BCrypt.Net.BCrypt.Verify(loginRequest.Otp, singleRecord.Password))
                 {
                     var token = createToken(singleRecord);
-                    return token;
+                var tokenResponse = new TokenResponse()
+                {
+                    Token = token
+                };
+                    return tokenResponse;
+                    
                 }
                 else
                 {
-                    return "Ajith";
+                    return null;
                 }
-            }
-            else
-            {
-                return "Vijay";
-            }
-           
-            
+
+
+
         }
 
         private string createToken(Account singleRecord)

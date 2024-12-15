@@ -69,6 +69,8 @@ builder.Services.AddAuthentication().AddJwtBearer(options => {
         };
     });
 
+builder.Services.AddAuthorization();
+
 
 
 
