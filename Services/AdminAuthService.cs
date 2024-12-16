@@ -171,6 +171,20 @@ namespace ITEC_API.Services
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
+        public async Task logout(PasswordRequest passwordRequest)
+        {
+            var singleRecord = await _iAdminAuthRepo.getAccountByMailId(passwordRequest.MailId);
+            var otp = generateOTP();
+
+            if(singleRecord != null)
+            {
+                singleRecord.Password = otp.ToString();
+                await _iAdminAuthRepo.addPassword(singleRecord);
+            }
+
+            
+        }
+
 
 
 

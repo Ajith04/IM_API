@@ -10,5 +10,6 @@ namespace ITEC_API.IServices
         Task<List<AccounNameResponse>> getAllAccounts();
         Task addPassword(PasswordRequest passwordRequest);
         Task<TokenResponse> login(loginRequest loginRequest);
+        Task logout(PasswordRequest passwordRequest);
     }
 }

@@ -51,5 +51,12 @@ namespace ITEC_API.Controllers
             return Ok(token);
         }
 
+        [HttpPatch("logout")]
+        public async Task<IActionResult> logout(PasswordRequest passwordRequest)
+        {
+            await _iAdminAuthService.logout(passwordRequest);
+            return Ok();
+        }
+
     }
 }
