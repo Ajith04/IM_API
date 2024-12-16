@@ -292,3 +292,8 @@ E:\Institute_Management\Back-End\ITEC_API\bin\Debug\net8.0\System.Security.Crypt
 E:\Institute_Management\Back-End\ITEC_API\bin\Debug\net8.0\runtimes\win\lib\net8.0\System.Security.Cryptography.Pkcs.dll
 E:\Institute_Management\Back-End\ITEC_API\bin\Debug\net8.0\BCrypt.Net.dll
 E:\Institute_Management\Back-End\ITEC_API\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+E:\Institute_Management\Back-End\ITEC_API\bin\Debug\net8.0\publish\web.config
+E:\Institute_Management\Back-End\ITEC_API\bin\Debug\net8.0\publish\appsettings.Development.json
+E:\Institute_Management\Back-End\ITEC_API\bin\Debug\net8.0\publish\appsettings.json
+E:\Institute_Management\Back-End\ITEC_API\bin\Debug\net8.0\publish\ITEC_API.deps.json
+E:\Institute_Management\Back-End\ITEC_API\bin\Debug\net8.0\publish\ITEC_API.runtimeconfig.json
