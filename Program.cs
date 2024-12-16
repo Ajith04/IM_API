@@ -17,12 +17,10 @@ builder.Services.AddControllers();
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("ITEC-FrontEnd", policy =>
-    {
-        policy.WithOrigins("https://calm-stone-035810a00.4.azurestaticapps.net") 
-              .AllowAnyHeader() 
-              .AllowAnyMethod(); 
-    });
+    options.AddPolicy("AllowAllOrigins", builder =>
+        builder.AllowAnyOrigin()
+               .AllowAnyMethod()
+               .AllowAnyHeader());
 });
 
 
@@ -86,7 +84,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseCors("ITEC-FrontEnd");
+app.UseCors("AllowAllOrigins");
 
 
 app.UseAuthorization();
