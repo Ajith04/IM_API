@@ -130,5 +130,56 @@ namespace ITEC_API.Services
             }
 
         }
+
+        public async Task<List<PaymentStudentResponse>> getEnrollmentsWithNonPaidStudent()
+        {
+            var studentList = new List<PaymentStudentResponse>();
+
+            var allStudents = await _iPaymentRepo.getEnrollmentsWithNonPaidStudent();
+            if(allStudents != null)
+            {
+                foreach (var student in allStudents)
+                {
+                    if(student.StudentCourseEnrollments != null)
+                    {
+                        foreach(var enrollment in student.StudentCourseEnrollments)
+                        {
+                            var totalPaidAmount = await _iPaymentRepo.getStudentAllPayments(enrollment.EnrollmentId);
+
+                            if (enrollment.Payments != null)
+                            {
+                                var lastRecord = enrollment.Payments.LastOrDefault();
+                                var lastPaymentDate = lastRecord?.PaidDate;
+                                var overDueDate = DateTime.Now.AddDays(-30);
+
+                                if(lastPaymentDate < overDueDate)
+                                {
+                                    var singleStudent = new PaymentStudentResponse()
+                                    {
+                                        StudentId = student.StudentId,
+                                        FirstName = student.FirstName,
+                                        EnrolledCourses = new List<PaymentEnrollmentResponse>()
+                                    };
+
+                                    singleStudent.EnrolledCourses.Add(new PaymentEnrollmentResponse()
+                                    {
+                                        EnrollmentId = enrollment.EnrollmentId,
+                                        CourseId = enrollment.CourseId,
+                                        CourseName = $"{enrollment.CourseLevel.MainCourse.CourseName} - {enrollment.CourseLevel.LevelEnrollment.Level.LevelName}",
+                                        CourseFee = enrollment.CourseFee,
+                                        PayableAmount = enrollment.CourseFee - totalPaidAmount,
+                                    });
+
+                                    studentList.Add(singleStudent);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            return studentList;
+
+        }
     }
 }

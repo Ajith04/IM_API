@@ -50,5 +50,12 @@ namespace ITEC_API.Controllers
             var paymentHistory = await _iPaymentService.getPaymentHistory(id);
             return Ok(paymentHistory);
         }
+
+        [HttpGet ("get-non-paid-students")]
+        public async Task<IActionResult> getEnrollmentsWithNonPaidStudent()
+        {
+            var allStudents = await _iPaymentService.getEnrollmentsWithNonPaidStudent();
+            return Ok(allStudents);
+        }
     }
 }

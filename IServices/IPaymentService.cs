@@ -10,5 +10,6 @@ namespace ITEC_API.IServices
         Task<PaymentStudentResponse> getEnrollmentsWithStudent(string id);
         Task sendPaymentRequest(SendPaymentRequest sendPayment);
         Task<List<PaymentHistoryResponse>> getPaymentHistory(string id);
+        Task<List<PaymentStudentResponse>> getEnrollmentsWithNonPaidStudent();
     }
 }

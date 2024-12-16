@@ -13,5 +13,6 @@ namespace ITEC_API.IRepositories
         Task<decimal> getStudentAllPayments(int enrollmentId);
         Task sendPaymentRequest(Payment payment);
         Task<List<Payment>> getPaymentHistory(string id);
+        Task<List<Student>> getEnrollmentsWithNonPaidStudent();
     }
 }

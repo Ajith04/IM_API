@@ -67,5 +67,19 @@ namespace ITEC_API.Repositories
             return paymentHistory;
          
         }
+
+        public async Task<List<Student>> getEnrollmentsWithNonPaidStudent()
+        {
+            var students = await _itecDbContext.Students.Include(s => s.StudentCourseEnrollments).ThenInclude(sce => sce.Payments)
+                .Include(s =>s.StudentCourseEnrollments).ThenInclude(sce => sce.CourseLevel).ThenInclude(cl => cl.MainCourse)
+                .Include(s => s.StudentCourseEnrollments).ThenInclude(sce => sce.CourseLevel).ThenInclude(cl => cl.LevelEnrollment).ThenInclude(le => le.Level)
+                .ToListAsync();
+
+            return students;
+        }
+
+
+
+
     }
 }
