@@ -10,7 +10,7 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+
 
 builder.Services.AddControllers();
 
@@ -19,7 +19,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("ITEC-FrontEnd", policy =>
     {
-        policy.WithOrigins("http://localhost:4200") 
+        policy.WithOrigins("https://calm-stone-035810a00.4.azurestaticapps.net") 
               .AllowAnyHeader() 
               .AllowAnyMethod(); 
     });
@@ -77,7 +77,7 @@ builder.Services.AddAuthorization();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -86,7 +86,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseCors("ITEC-FrontEnd"); // Ensure this matches the CORS policy name
+app.UseCors("ITEC-FrontEnd");
 
 
 app.UseAuthorization();
