@@ -78,6 +78,10 @@ builder.Services.AddAuthorization();
 
 var app = builder.Build();
 
+app.UseStaticFiles();
+
+app.MapFallbackToFile("index.html");
+
 
 if (app.Environment.IsDevelopment())
 {
