@@ -15,7 +15,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowFrontend",
         policy =>
         {
-            policy.WithOrigins("https://calm-stone-035810a00.4.azurestaticapps.net")
+            policy.WithOrigins("https://ashy-ocean-0bfc3fc00.6.azurestaticapps.net")
                   .AllowAnyMethod()
                   .AllowAnyHeader();
         });
