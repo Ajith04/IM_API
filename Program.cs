@@ -15,7 +15,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowFrontend",
         policy =>
         {
-            policy.WithOrigins("https://ashy-ocean-0bfc3fc00.6.azurestaticapps.net")
+            policy.WithOrigins("itec-frontend-d0d5cpekbndxayfm.southeastasia-01.azurewebsites.net")
                   .AllowAnyMethod()
                   .AllowAnyHeader();
         });
