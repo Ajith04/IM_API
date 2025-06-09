@@ -15,7 +15,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowFrontend",
         policy =>
         {
-            policy.WithOrigins("itec-frontend-d0d5cpekbndxayfm.southeastasia-01.azurewebsites.net")
+            policy.WithOrigins("https://black-smoke-0328c1a00.6.azurestaticapps.net")
                   .AllowAnyMethod()
                   .AllowAnyHeader();
         });
