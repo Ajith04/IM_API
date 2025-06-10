@@ -1,0 +1,1005 @@
+[
+  {
+    "ContainingType": "ITEC_API.Controllers.AdminAuthController",
+    "Method": "addAccount",
+    "RelativePath": "api/AdminAuth/add-account",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "registerAccountRequest",
+        "Type": "ITEC_API.DTO.RequestDTO.RegisterAccounRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ITEC_API.Controllers.AdminAuthController",
+    "Method": "addPassword",
+    "RelativePath": "api/AdminAuth/add-password",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "passwordRequest",
+        "Type": "ITEC_API.DTO.RequestDTO.PasswordRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ITEC_API.Controllers.AdminAuthController",
+    "Method": "getAllAccounts",
+    "RelativePath": "api/AdminAuth/get-all-accounts",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ITEC_API.Controllers.AdminAuthController",
+    "Method": "getAllRoles",
+    "RelativePath": "api/AdminAuth/get-all-roles",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ITEC_API.Controllers.AdminAuthController",
+    "Method": "login",
+    "RelativePath": "api/AdminAuth/login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "loginRequest",
+        "Type": "ITEC_API.DTO.RequestDTO.loginRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ITEC_API.Controllers.AdminAuthController",
+    "Method": "logout",
+    "RelativePath": "api/AdminAuth/logout",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "passwordRequest",
+        "Type": "ITEC_API.DTO.RequestDTO.PasswordRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ITEC_API.Controllers.CourseController",
+    "Method": "addCourseLevel",
+    "RelativePath": "api/Course/add-course-level",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "addCourseLevelRequest",
+        "Type": "ITEC_API.DTO.RequestDTO.AddCourseLevelRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ITEC_API.Controllers.CourseController",
+    "Method": "addMainCourse",
+    "RelativePath": "api/Course/add-main-course",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "CourseName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Categories",
+        "Type": "System.Collections.Generic.List\u00601[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Thumbnails",
+        "Type": "System.Collections.Generic.List\u00601[[Microsoft.AspNetCore.Http.IFormFile, Microsoft.AspNetCore.Http.Features, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60]]",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ITEC_API.Controllers.CourseController",
+    "Method": "assignInstructor",
+    "RelativePath": "api/Course/assign-instructor",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "assignInstructorRequest",
+        "Type": "ITEC_API.DTO.RequestDTO.AssignInstructorRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ITEC_API.Controllers.CourseController",
+    "Method": "deleteCourseLevel",
+    "RelativePath": "api/Course/delete-course-level/{levelId}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "levelId",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ITEC_API.Controllers.CourseController",
+    "Method": "getAllCategories",
+    "RelativePath": "api/Course/get-all-categories",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ITEC_API.Controllers.CourseController",
+    "Method": "getAllCourseNames",
+    "RelativePath": "api/Course/get-all-course-names",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ITEC_API.Controllers.CourseController",
+    "Method": "getAllCourses",
+    "RelativePath": "api/Course/get-all-courses",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ITEC_API.Controllers.CourseController",
+    "Method": "getAllLevels",
+    "RelativePath": "api/Course/get-all-levels",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ITEC_API.Controllers.CourseController",
+    "Method": "getAssignedInstructor",
+    "RelativePath": "api/Course/get-assigned-instructors/{courseId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "courseId",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ITEC_API.Controllers.CourseController",
+    "Method": "getInstructorForCourse",
+    "RelativePath": "api/Course/get-instructor-for-course/{levelId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "levelId",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ITEC_API.Controllers.CourseController",
+    "Method": "getMainCourseNames",
+    "RelativePath": "api/Course/get-main-course-names",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ITEC_API.Controllers.CourseController",
+    "Method": "getSingleCourseLevel",
+    "RelativePath": "api/Course/get-single-course-level/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ITEC_API.Controllers.CourseController",
+    "Method": "deleteInstructorEnrollment",
+    "RelativePath": "api/Course/remove-assigned-instructor/{enrollmentId}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "enrollmentId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ITEC_API.Controllers.CourseController",
+    "Method": "updateSingleCourse",
+    "RelativePath": "api/Course/update-single-course/{levelId}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "levelId",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "updateSingleCourseRequest",
+        "Type": "ITEC_API.DTO.RequestDTO.UpdateSingleCourseRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ITEC_API.Controllers.IMController",
+    "Method": "addNewBatch",
+    "RelativePath": "api/IM/add-batch",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "batchNameRequest",
+        "Type": "ITEC_API.DTO.RequestDTO.BatchNameRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ITEC_API.Controllers.IMController",
+    "Method": "addNewCategory",
+    "RelativePath": "api/IM/add-category",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "categoryNameRequest",
+        "Type": "ITEC_API.DTO.RequestDTO.CategoryNameRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ITEC_API.Controllers.IMController",
+    "Method": "addCourseName",
+    "RelativePath": "api/IM/add-course-name",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "courseNameRequest",
+        "Type": "ITEC_API.DTO.RequestDTO.CourseNameRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ITEC_API.Controllers.IMController",
+    "Method": "addExpense",
+    "RelativePath": "api/IM/add-expense",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Title",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Date",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      },
+      {
+        "Name": "Amount",
+        "Type": "System.Decimal",
+        "IsRequired": false
+      },
+      {
+        "Name": "Receipt",
+        "Type": "System.Collections.Generic.List\u00601[[Microsoft.AspNetCore.Http.IFormFile, Microsoft.AspNetCore.Http.Features, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Description",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ITEC_API.Controllers.IMController",
+    "Method": "addInstructor",
+    "RelativePath": "api/IM/add-instructor",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "InstructorName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Description",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Avatar",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      },
+      {
+        "Name": "CourseNames",
+        "Type": "System.Collections.Generic.List\u00601[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "DateOfJoin",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      },
+      {
+        "Name": "Mobile",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Email",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ITEC_API.Controllers.IMController",
+    "Method": "addNewLevel",
+    "RelativePath": "api/IM/add-level",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "levelNameRequest",
+        "Type": "ITEC_API.DTO.RequestDTO.LevelNameRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ITEC_API.Controllers.IMController",
+    "Method": "changeRegFee",
+    "RelativePath": "api/IM/change-reg-fee",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "changeRegFee",
+        "Type": "ITEC_API.DTO.RequestDTO.ChangeRegFee",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ITEC_API.Controllers.IMController",
+    "Method": "getAllBatches",
+    "RelativePath": "api/IM/get-all-batches",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ITEC_API.Controllers.IMController",
+    "Method": "getAllCategories",
+    "RelativePath": "api/IM/get-all-categories",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ITEC_API.Controllers.IMController",
+    "Method": "getAllExpenses",
+    "RelativePath": "api/IM/get-all-expenses",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ITEC_API.Controllers.IMController",
+    "Method": "getAllinstructors",
+    "RelativePath": "api/IM/get-all-instructors",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ITEC_API.Controllers.IMController",
+    "Method": "getAllLevels",
+    "RelativePath": "api/IM/get-all-levels",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ITEC_API.Controllers.IMController",
+    "Method": "getRegFee",
+    "RelativePath": "api/IM/get-reg-fee",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ITEC_API.Controllers.IMController",
+    "Method": "getSingleInstructor",
+    "RelativePath": "api/IM/get-single-instructor/{instructorId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "instructorId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ITEC_API.Controllers.IMController",
+    "Method": "removeInstructor",
+    "RelativePath": "api/IM/remove-instructor-by-id/{instructorId}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "instructorId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ITEC_API.Controllers.IMController",
+    "Method": "updateInstructor",
+    "RelativePath": "api/IM/update-instructor/{instructorId}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "instructorId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "Avatar",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      },
+      {
+        "Name": "Description",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Mobile",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Email",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "KnownCourses",
+        "Type": "System.Collections.Generic.List\u00601[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ITEC_API.Controllers.PaymentController",
+    "Method": "addRegFee",
+    "RelativePath": "api/Payment/add-reg-fee",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "studentIdRequest",
+        "Type": "ITEC_API.DTO.RequestDTO.StudentIdRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ITEC_API.Controllers.PaymentController",
+    "Method": "getEnrollmentsWithStudent",
+    "RelativePath": "api/Payment/get-enrollments-with-student/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ITEC_API.Controllers.PaymentController",
+    "Method": "getEnrollmentsWithNonPaidStudent",
+    "RelativePath": "api/Payment/get-non-paid-students",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ITEC_API.Controllers.PaymentController",
+    "Method": "getNotRegFeeStudents",
+    "RelativePath": "api/Payment/get-not-regfee-students",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ITEC_API.Controllers.PaymentController",
+    "Method": "getPaymentHistory",
+    "RelativePath": "api/Payment/get-payment-history/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ITEC_API.Controllers.PaymentController",
+    "Method": "sendSinglePayment",
+    "RelativePath": "api/Payment/send-single-payment",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "sendPayment",
+        "Type": "ITEC_API.DTO.RequestDTO.SendPaymentRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ITEC_API.Controllers.SMController",
+    "Method": "addStudyMaterial",
+    "RelativePath": "api/SM/add-study-material",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Title",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "LevelId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "BatchName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Date",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      },
+      {
+        "Name": "Description",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Files",
+        "Type": "System.Collections.Generic.List\u00601[[Microsoft.AspNetCore.Http.IFormFile, Microsoft.AspNetCore.Http.Features, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60]]",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ITEC_API.Controllers.SMController",
+    "Method": "getStudyMaterials",
+    "RelativePath": "api/SM/get-all-study-materials",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ITEC_API.Controllers.SMController",
+    "Method": "getCourseLevels",
+    "RelativePath": "api/SM/get-course-levels/{courseName}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "courseName",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ITEC_API.Controllers.StudentController",
+    "Method": "addFollowup",
+    "RelativePath": "api/Student/add-followup",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "followUpRequest",
+        "Type": "ITEC_API.DTO.RequestDTO.FollowUpRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ITEC_API.Controllers.StudentController",
+    "Method": "addNewStudent",
+    "RelativePath": "api/Student/add-new-student",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "studentRequest",
+        "Type": "ITEC_API.DTO.RequestDTO.StudentRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ITEC_API.Controllers.StudentController",
+    "Method": "addStudentBatchEnrollment",
+    "RelativePath": "api/Student/add-student-batch-enrollment",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "studentBatchRequest",
+        "Type": "ITEC_API.DTO.RequestDTO.StudentBatchRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ITEC_API.Controllers.StudentController",
+    "Method": "addStudentCourseEnrollment",
+    "RelativePath": "api/Student/add-student-course-enrollment",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "studentEnrollmentRequest",
+        "Type": "ITEC_API.DTO.RequestDTO.StudentEnrollmentRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ITEC_API.Controllers.StudentController",
+    "Method": "checkRegFee",
+    "RelativePath": "api/Student/check-reg-fee/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ITEC_API.Controllers.StudentController",
+    "Method": "deleteBatchEnrollment",
+    "RelativePath": "api/Student/delete-batch-enrollment/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ITEC_API.Controllers.StudentController",
+    "Method": "deleteCourseEnrollment",
+    "RelativePath": "api/Student/delete-course-enrollment/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ITEC_API.Controllers.StudentController",
+    "Method": "deleteStudent",
+    "RelativePath": "api/Student/delete-student/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ITEC_API.Controllers.StudentController",
+    "Method": "getAllFollowup",
+    "RelativePath": "api/Student/get-all-followup",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ITEC_API.Controllers.StudentController",
+    "Method": "getAllStudents",
+    "RelativePath": "api/Student/get-all-students",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ITEC_API.Controllers.StudentController",
+    "Method": "getBatchesForCourse",
+    "RelativePath": "api/Student/get-batches-for-student/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ITEC_API.Controllers.StudentController",
+    "Method": "getCoursesForStudent",
+    "RelativePath": "api/Student/get-courses-for-student/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ITEC_API.Controllers.StudentController",
+    "Method": "getEnrollments",
+    "RelativePath": "api/Student/get-enrollments",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ITEC_API.Controllers.StudentController",
+    "Method": "getSingleStudent",
+    "RelativePath": "api/Student/get-single-student/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ITEC_API.Controllers.StudentController",
+    "Method": "removeFollowup",
+    "RelativePath": "api/Student/remove-followup/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ITEC_API.Controllers.StudentController",
+    "Method": "updateDescription",
+    "RelativePath": "api/Student/update-description/{id}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "description",
+        "Type": "ITEC_API.DTO.RequestDTO.DescriptionRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ITEC_API.Controllers.StudentController",
+    "Method": "updateSingleStudent",
+    "RelativePath": "api/Student/update-single-student/{id}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "studentUpdateRequest",
+        "Type": "ITEC_API.DTO.RequestDTO.StudentUpdateRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]
