@@ -55,4 +55,4 @@ jobs:
           app-name: 'ITECAPI'
           slot-name: 'Production'
           package: .
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_0D1001E37B8A4992A898F1C3CA1099DE }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_650F50447CD142D697806396EF16DF70 }}
